@@ -424,7 +424,7 @@ function get_top_lista($data) {
                                     ?>
                                     <li>
                                         <a href="<?php echo $urlLg; ?>" >
-                                            <img src="<?php echo WWW_PATH . "dnt-view/layouts/wp_tpl_2/images/flags/flag_" . $lg . ".png"; ?>" alt="<?php echo $lg; ?>"></a>
+                                            <img src="<?php echo $data['media_path']."/images/flags/flag_" . $lg . ".png"; ?>" alt="<?php echo $lg; ?>"></a>
                                     </li>
                                     <?php
                                 }
