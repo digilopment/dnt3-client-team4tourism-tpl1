@@ -36,10 +36,12 @@ $data = Frontend::get();
                            <?php 
                               $GALLERY = explode(",", $data['meta_tree']['keys']['id_'.$i.'_image_1']['value']);
                               $PHOTOS = array();
-                              foreach($GALLERY as $item){
-                              	$img = Image::getFileImage($item);
-                              	echo '<img class="modul-image img-responsive" src="'.$img.'"><br/>';
-                              }
+							  if($data['meta_tree']['keys']['id_'.$i.'_image_1']['show'] == 1){
+								  foreach($GALLERY as $item){
+									$img = Image::getFileImage($item);
+									echo '<img class="modul-image img-responsive" src="'.$img.'"><br/>';
+								  }
+							  }
                               ?>
                            <?php if($data['meta_tree']['keys']['id_'.$i.'_text_2']['show'] == 1){?>
                            <div class="row dnt-progress">
