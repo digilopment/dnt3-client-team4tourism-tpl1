@@ -172,7 +172,7 @@
                     }
                 });
             </script> 
-            <?php if($data['meta_tree']['keys']['enable_registration']['show'] == 1){?>
+			<?php if(Vendor::getColumn("in_progress") == 1){?>
             <div class="containers">
                <div class="row">
                   <div class="col-md-12">
