@@ -58,11 +58,9 @@ $data = Frontend::get();
                            <?php } ?>
                         </div>
                         <div class="col-md-7">
-                           <h2 class="mb-15"><?php echo $data['meta_tree']['keys']['id_' . $i . '_hotel_name']['value'] ?></h2>
-                           <ul class="experiance mb-15">
-                              <li><?php echo $data['title']; ?></li>
-                              <li><?php echo $data['article']['name']; ?></li>
-                           </ul>
+						   <?php if ($data['meta_tree']['keys']['id_' . $i . '_hotel_name']['value']) { ?>
+							<h2 class="mb-15"><?php echo $data['meta_tree']['keys']['id_' . $i . '_hotel_name']['value'] ?></h2>
+						   <?php } ?>
                            <?php echo $data['meta_tree']['keys']['id_' . $i . '_text']['value'] ?>
                         </div>
                      </div>

@@ -142,7 +142,7 @@ foreach ($GALLERY as $item) {
                         <h3 class="text-left"><?php echo $data['meta_tree']['keys']['mapa']['value']; ?></h3>
                         <div class="row mapa">
                             <div class="col-md-12">
-                                <div id="googleMap" style="width:100%;height:400px;"></div>
+                                <div id="googleMap" style="width:100%;height:270px;"></div>
                             </div>
                         </div>
                     <?php } ?>
