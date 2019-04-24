@@ -333,9 +333,12 @@ html body a:hover {
 }
 
 .col-md-9.main-content h2 {
-	font-size: 28px;
 	margin-top: -8px;
 	margin-bottom: 50px;
+}
+
+html body h2.title-v4{
+	font-size: 20px;
 }
 
 .col-md-9.main-content p {
