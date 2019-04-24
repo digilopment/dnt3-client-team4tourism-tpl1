@@ -17,8 +17,12 @@ function color_conf($data) {
    .strip_cookies .btn-primary {background-color: ' . $color . ';border-color: ' . $colorDarken2 . ';}
    
    html body{
-   	font-family: "' . $data['meta_settings']['keys']['font']['value'] . '" !important;
+	   font-family: "' . $data['meta_settings']['keys']['font']['value'] . '" !important;
    }
+  html body h2.title-v4{
+	   font-family: "' . $data['meta_settings']['keys']['font']['value'] . '" !important;
+   }
+   
    .title-v4 {
        color: ' . $color . ';
    }
