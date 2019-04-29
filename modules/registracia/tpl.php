@@ -272,7 +272,6 @@
                               <div class="col-xs-12 col-md-11">
                                  <a target="_blank" href="<?php echo Image::getFileImage($data['meta_tree']['keys']['form_file_newsletter_1']['value']); ?>">
                                  <i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "suhlas_s_newslettrom_1", "translate");?>
-                                 </a><span class="povinne">*</span>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
                                  <input type="checkbox" name="newsletter_1" >
@@ -376,7 +375,7 @@
                               </div>
                               <div class="col-xs-12 col-md-7">
 									<br/>
-                                 <label><span class="povinne">* </span> - <?php echo Multylanguage::translate($data, "field_word_err", "translate");?></label>
+                                 <label><span class="povinne">* </span><?php echo Multylanguage::translate($data, "field_word_err", "translate");?></label>
                               </div>
                            </div>
                            <?php } ?>
