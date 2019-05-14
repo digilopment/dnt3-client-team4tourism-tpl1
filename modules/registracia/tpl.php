@@ -36,7 +36,6 @@
 <!-- End Header -->
 <?php get_slider_main_db($data, 303, "mainslider");?>
 <?php /*get_slider($data, 303);*/ 
-<?php
    $FORM_BASE_VALUE = array();
    foreach(array_keys($data['meta_tree']['keys']) as $key){
    	if(Dnt::in_string("form_base", $key)){
