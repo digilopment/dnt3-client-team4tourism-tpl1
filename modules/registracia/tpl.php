@@ -35,7 +35,7 @@
 </style>
 <!-- End Header -->
 <?php get_slider_main_db($data, 303, "mainslider");?>
-<?php /*get_slider($data, 303);*/ ?>
+<?php /*get_slider($data, 303);*/ 
 <?php
    $FORM_BASE_VALUE = array();
    foreach(array_keys($data['meta_tree']['keys']) as $key){
@@ -117,7 +117,11 @@
 
                             $.ajax({
                                 // Your server script to process the upload
+								<?php if(MultyLanguage::getLang() == "0"){ ?>
                                 url: "<?php echo WWW_PATH; ?>rpc/json/competition-register/<?php echo $data['post_id']?>",
+								<?php }else{?>
+								url: "<?php echo WWW_PATH.MultyLanguage::getLang(); ?>/rpc/json/competition-register/<?php echo $data['post_id']?>",
+								<?php } ?>
                                 type: 'POST',
 
                                 // Form data
