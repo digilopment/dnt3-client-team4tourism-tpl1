@@ -16,10 +16,10 @@ function color_conf($data) {
    .strip_cookies {background: ' . $colorDarken2 . ';}
    .strip_cookies .btn-primary {background-color: ' . $color . ';border-color: ' . $colorDarken2 . ';}
    
-   html body{
-	   font-family: "' . $data['meta_settings']['keys']['font']['value'] . '" !important;
-   }
-  html body h2.title-v4{
+   html body,
+   .footer-v8 .footer h2,
+   .carousel-caption h1,
+   html body h2.title-v4{
 	   font-family: "' . $data['meta_settings']['keys']['font']['value'] . '" !important;
    }
    
@@ -334,15 +334,29 @@ function get_top($data) {
             <link rel="" type="img/x-icon" href="<?php echo $favicon; ?>" />
             <link rel="" type="img/png" href="<?php echo $favicon; ?>" />
             <link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo $favicon; ?>" />
-            <!-- Web Fonts -->
-            <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700'>
             <!-- CSS Customization -->
             <link rel="stylesheet" href="<?php echo $data['media_path']; ?>css/bundle.css">
             <link rel="stylesheet" href="<?php echo $data['media_path']; ?>css/custom.css?<?php echo rand(10, 1000) ?>">
-            <!-- Custom Fonts -->
-            <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-            <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-            <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+            <!-- Custom Web Fonts -->
+			<?php
+            $font = $data['meta_settings']['keys']['font']['value'];
+			if($font == 'Roboto'){
+				$fontStyle = "<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700'>";
+			}
+			elseif($font == 'Open Sans'){
+				$fontStyle = "<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>";
+			}
+			elseif($font == 'Merriweather'){
+				$fontStyle = "<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>";
+			}
+			elseif($font == 'Lucida Sans Unicode' || $font == 'Myriad Pro Regular' || $font == 'Times New Roman'){
+				$fontStyle = "";
+			}
+			else{
+				$fontStyle = "<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=".$font."'>";
+			}
+			echo $fontStyle;
+            ?>
             <!-- light box -->
             <script src="<?php echo $data['media_path']; ?>js/lightbox-plus-jquery.min.js"></script>
             <script src="<?php echo $data['media_path']; ?>js/jquery.min.js"></script>
