@@ -32,30 +32,38 @@ $newsletter_embed_3 = $rest->post("newsletter_embed_3");
 
 if($data['meta_settings']['keys']['gc_secret_key']['show'] == 1 && $data['meta_settings']['keys']['gc_site_key']['show'] == 1){
 	$NO_CAPTCHA = 0;
-	$gc->setCheckedOptions($_POST['g-recaptcha-response']);
+	if(isset($_POST['g-recaptcha-response'])){
+		$gcResponse = $_POST['g-recaptcha-response'];
+	}else{
+		$gcResponse = false;
+	}
+	$gc->setCheckedOptions($gcResponse);
 }else{
 	$NO_CAPTCHA = 1;
 }
 
 if(isset($_POST['sent'])){
 	if($gc->getResult() || $NO_CAPTCHA){
+		$attachment = "";
 		
 		$filePath = "dnt-view/data/external-uploads/";
-		$dntUpload = new Upload($_FILES['form_user_image_1']); 
-		if ($dntUpload->uploaded) {
-		   // save uploaded image with no changes
-		   $dntUpload->image_resize = true;
-		   $dntUpload->image_convert = 'jpg';
-		   $dntUpload->image_x = 800;
-		   //$dntUpload->image_max_width = 800;   
-		   $dntUpload->image_ratio_y = true;
-		   $dntUpload->Process($filePath);
-		   if ($dntUpload->processed) {
-			 $CUSTOM = json_encode(var_export($_FILES['form_user_image_1'], true));
-			 $attachment =  "".WWW_PATH."".$filePath."".$dntUpload->file_dst_name."";
-		   } else {
-			 $attachment = "";
-		   }
+		if(isset($_FILES['form_user_image_1']) ){  
+			$dntUpload = new Upload($_FILES['form_user_image_1']); 
+			if ($dntUpload->uploaded) {
+			   // save uploaded image with no changes
+			   $dntUpload->image_resize = true;
+			   $dntUpload->image_convert = 'jpg';
+			   $dntUpload->image_x = 800;
+			   //$dntUpload->image_max_width = 800;   
+			   $dntUpload->image_ratio_y = true;
+			   $dntUpload->Process($filePath);
+			   if ($dntUpload->processed) {
+				 $CUSTOM = json_encode(var_export($_FILES['form_user_image_1'], true));
+				 $attachment =  "".WWW_PATH."".$filePath."".$dntUpload->file_dst_name."";
+			   } else {
+				 $attachment = "";
+			   }
+			}
 		}
 		
 		$table								= "dnt_registred_users";
