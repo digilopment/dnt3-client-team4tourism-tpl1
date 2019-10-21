@@ -796,6 +796,7 @@ function col_right($data) { ?>
             </ul>
         </div>
     </div>
+	<?php if(!Frontend::getMetaSettingBool($data, 'hide_registration_info')){?>
     <div class="margin-bottom-50 dalsie-info">
         <h2 class="title-v4 "><?php echo Multylanguage::translate($data, "registracia", "translate"); ?></h2>
         <div class="blog-thumb-v3">
@@ -806,8 +807,10 @@ function col_right($data) { ?>
             </ul>
         </div>
     </div>
+	<?php } ?>
     <!-- End Blog Thumb v3 -->
     <!-- Social Shares -->
+	<?php if(!Frontend::getMetaSettingBool($data, 'hide_registration_info')){?>
     <div class="margin-bottom-50">
         <h2 class="title-v4"><?php echo Multylanguage::translate($data, "pravidla_sutaze", "translate"); ?></h2>
         <ul class="blog-social-shares">
@@ -872,6 +875,7 @@ function col_right($data) { ?>
             */ ?>
         </ul>
     </div>
+	<?php } ?>
     <!-- End Social Shares -->
     <!-- Blog Carousel Heading -->
 <?php } ?><?php

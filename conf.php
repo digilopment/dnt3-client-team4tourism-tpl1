@@ -193,6 +193,18 @@ function websettings(){
 		'`show`' 			=> '0',
 		'`order`' 			=> '10',
 	);
+	$insertedData[] = array(
+		'`type`' 			=> "default", 
+		'`key`' 			=> "hide_registration_info", 
+		'`value`' 			=> "", 
+		'`content_type`' 	=> "bool", 
+		'`description`' 	=> "Skryť informácie a preklik na registráciu v pravom stĺpci", 
+		'`vendor_id`' 		=> Vendor::getId(), 
+		'`show`' 			=> '0',
+		'`order`' 			=> '70',
+	);
+	
+	
 	
 	return $insertedData;
 }
