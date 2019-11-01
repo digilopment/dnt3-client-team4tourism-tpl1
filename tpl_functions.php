@@ -373,7 +373,7 @@ function get_top($data) {
         <script src="<?php echo $data['media_path']; ?>js/bootstrap.min.js"></script>
         <!-- JS Implementing Plugins -->
         <script src="<?php echo $data['media_path']; ?>js/back-to-top.js"></script>
-        <script src="<?php echo $data['media_path']; ?>js/smoothScroll.js"></script>
+        <?php /*<script src="<?php echo $data['media_path']; ?>js/smoothScroll.js"></script> */?>
         <script src="<?php echo $data['media_path']; ?>js/waypoints.min.js"></script>
         <script src="<?php echo $data['media_path']; ?>js/jquery.counterup.min.js"></script>
         <script src="<?php echo $data['media_path']; ?>js/jquery.fancybox.pack.js"></script>
