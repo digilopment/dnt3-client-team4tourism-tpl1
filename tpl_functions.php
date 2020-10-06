@@ -1,5 +1,21 @@
 <?php
 
+use DntLibrary\Base\AdminContent;
+use DntLibrary\Base\ArticleView;
+use DntLibrary\Base\DB;
+use DntLibrary\Base\Dnt;
+use DntLibrary\Base\Frontend;
+use DntLibrary\Base\Image;
+use DntLibrary\Base\MultyLanguage;
+use DntLibrary\Base\Navigation;
+use DntLibrary\Base\Rest;
+use DntLibrary\Base\Settings;
+use DntLibrary\Base\Vendor;
+use DntLibrary\Base\Webhook;
+
+?>
+<?php
+
 function color_conf($data) {
     //$color = $data['']
     //var_dump($data['meta_settings']['keys']['color']['value']);
@@ -412,7 +428,7 @@ function get_top($data) {
 
 function get_top_lista($data) {
     $multylanguage = new MultyLanguage;
-    $db = new Db;
+    $db = new DB;
     $webhook = new Webhook;
     $rest = new Rest;
     $searchUrl = $webhook->getSitemapModules("search");
@@ -469,7 +485,7 @@ function get_nav_menu($data) {
     $multylanguage = new MultyLanguage;
     $article = new ArticleView;
     $rest = new Rest;
-    $db = new Db;
+    $db = new DB;
     ?>	
     <!-- Navbar -->
     <div class="navbar mega-menu" role="navigation">
@@ -889,7 +905,7 @@ function get_slider_carousel($data, $dataType, $ids, $name, $text) {
             $PHOTOS[] = Image::getFileImage($item);
         }
     } else {
-        $db = new Db;
+        $db = new DB;
         $article = new ArticleView;
         $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND 
       		cat_id = '" . $ids . "' AND vendor_id = '" . Vendor::getId() . "'";
@@ -960,7 +976,7 @@ function get_slider_main_ids($data, $dataType, $ids, $name) {
             $PHOTOS[] = Image::getFileImage($item);
         }
     } else {
-        $db = new Db;
+        $db = new DB;
         $article = new ArticleView;
         $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND 
       		cat_id = '" . $ids . "' AND vendor_id = '" . Vendor::getId() . "'";
@@ -1034,7 +1050,7 @@ function get_slider_main_ids($data, $dataType, $ids, $name) {
 function get_slider_main_db($data, $ids, $name) {
     $multylanguage = new MultyLanguage;
     $article = new ArticleView;
-    $db = new Db;
+    $db = new DB;
 
     $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . $ids . "' AND vendor_id = '" . Vendor::getId() . "' AND `show` > 0";
 
@@ -1108,7 +1124,7 @@ function get_slider($data) {
     <?php
     $multylanguage = new MultyLanguage;
     $article = new ArticleView;
-    $db = new Db;
+    $db = new DB;
     $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . AdminContent::getCatId("sliders") . "' AND vendor_id = '" . Vendor::getId() . "' AND `show` > 0";
     if ($db->num_rows($query) > 0) {
         ?>

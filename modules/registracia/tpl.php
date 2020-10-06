@@ -1,4 +1,14 @@
 <?php
+
+use DntLibrary\Base\Dnt;
+use DntLibrary\Base\Frontend;
+use DntLibrary\Base\GoogleCaptcha;
+use DntLibrary\Base\Image;
+use DntLibrary\Base\MultyLanguage;
+use DntLibrary\Base\Rest;
+use DntLibrary\Base\Vendor;
+
+?><?php
    $data = Frontend::get();
    $layout = Vendor::getLayout();
    include "dnt-view/layouts/".$layout."/tpl_functions.php";
@@ -97,7 +107,7 @@
                         messages: {
                             <?php foreach($FORM_BASE_VALUE as $key => $form){
                                   if($key != "form_base_tel_c"){ ?>
-                            <?php echo $key; ?>: "<?php echo Multylanguage::translate($data, "field_word_err", "translate");?> ^",
+                            <?php echo $key; ?>: "<?php echo MultyLanguage::translate($data, "field_word_err", "translate");?> ^",
                             <?php } ?>
                             <?php } ?>
                             podmienky: "<?php echo Multylanguage::translate($data, "field_word_err", "translate");?> ^",
