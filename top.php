@@ -37,7 +37,7 @@ if ($data['meta_settings']['keys']['pixel_retargeting']['show'] == 1) {
     <div class="wrapper">
         <!--=== Header v8 ===-->
         <div class="header-v8 header-sticky">
-<?php get_top_lista($data); ?>
+            <?php get_top_lista($data); ?>
             <?php get_nav_menu($data, 303); ?>
         </div>
 

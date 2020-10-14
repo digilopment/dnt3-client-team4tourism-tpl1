@@ -9,11 +9,12 @@ use DntLibrary\Base\Rest;
 use DntLibrary\Base\Upload;
 use DntLibrary\Base\Vendor;
 use DntLibrary\Base\Voucher;
+use DntLibrary\Base\MultyLanguage;
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-$rest = new Rest;
-$db = new DB;
+$rest = new Rest();
+$db = new DB();
 $dntMailer = new Mailer;
 
 $postId = $rest->webhook(4);
@@ -133,7 +134,7 @@ if (isset($_POST['sent'])) {
          *
          *
          */
-        $msg = Multylanguage::translate($data, "dakujeme_za_registraciu", "translate");
+        $msg = MultyLanguage::translate($data, "dakujeme_za_registraciu", "translate");
 
         if ($data['meta_tree']['keys']['email_sender']['show'] == 1 && $data['meta_tree']['keys']['email_subject']['show'] == 1) {
             $senderEmail = $data['meta_tree']['keys']['email_sender']['value'];
