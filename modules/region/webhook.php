@@ -3,7 +3,7 @@
 use DntLibrary\Base\DB;
 use DntLibrary\Base\Rest;
 
-class registraciaModulController
+class regionModulController
 {
 
     public function run()
@@ -19,4 +19,5 @@ class registraciaModulController
 
 }
 
-registraciaModulController::run();
+$modul = new regionModulController();
+$modul->run();

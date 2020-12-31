@@ -19,4 +19,5 @@ class partneriModulController
 
 }
 
-partneriModulController::run();
+$modul = new partneriModulController();
+$modul->run();

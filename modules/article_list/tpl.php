@@ -9,13 +9,19 @@ use DntLibrary\Base\Image;
 use DntLibrary\Base\Rest;
 use DntLibrary\Base\Vendor;
 use DntLibrary\Base\Webhook;
-?>
-<?php
-include "dnt-view/layouts/" . Vendor::getLayout() . "/tpl_functions.php";
-$data = Frontend::get();
+
+
+$frontend = new Frontend();
+$vendor = new Vendor();
+$dnt = new Dnt();
+$image = new Image();
+$articleList = new ArticleList();
+
+include "dnt-view/layouts/" . $vendor->getLayout() . "/tpl_functions.php";
+$data = $frontend->get();
 //$data = false;
 get_top($data);
-include "dnt-view/layouts/" . Vendor::getLayout() . "/top.php";
+include "dnt-view/layouts/" . $vendor->getLayout() . "/top.php";
 
 $rest = new Rest;
 $db = new DB;
@@ -34,11 +40,11 @@ $webhook = new Webhook;
                     $imgMeta = false;
                     $nameMeta = false;
                     $contentMeta = false;
-                    $query = ArticleList::query();
+                    $query = $articleList->query();
                     if ($db->num_rows($query) > 0) {
 
                         foreach ($db->get_results($query) as $row) {
-                            $img = Image::getPostImage($row['id'], "dnt_posts");
+                            $img = $image->getPostImage($row['id'], "dnt_posts");
                             $content = $row['content'];
                             $perex = $row['perex'];
                             $name = $row['name'];
@@ -47,7 +53,7 @@ $webhook = new Webhook;
                             $metaArr = $articleView->getPostsMeta($row['id'], $row['service']);
                             foreach ($metaArr as $meta) {
                                 if ($meta['content_type'] == "image") {
-                                    $imgMeta = Image::getFileImage($meta['value']);
+                                    $imgMeta = $image->getFileImage($meta['value']);
                                     break;
                                 }
                             }
@@ -69,13 +75,13 @@ $webhook = new Webhook;
                                 $url = WWW_PATH . $modul[0];
                             }
 
-                            if (Dnt::not_html($content) == "") {
+                            if ($dnt->not_html($content) == "") {
                                 $content = $contentMeta;
                             }
                             if ($img == "") {
                                 $img = $imgMeta;
                             }
-                            if (Dnt::not_html($name) == "") {
+                            if ($dnt->not_html($name) == "") {
                                 $name = $nameMeta;
                             }
                             ?>

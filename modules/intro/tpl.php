@@ -2,30 +2,15 @@
 
 use DntLibrary\Base\Frontend;
 use DntLibrary\Base\Vendor;
-?><?php
-$data = Frontend::get();
-$layout = Vendor::getLayout();
+
+$frontend = new Frontend();
+$vendor = new Vendor();
+$data = $frontend->get();
+$layout = $vendor->getLayout();
 include "dnt-view/layouts/" . $layout . "/tpl_functions.php";
 include "dnt-view/layouts/" . $layout . "/top.php";
 ?>
 <!-- End Header -->
-<?php /* get_slider($data, 303); */ ?>
-<?php /*
-  <style type="text/css">
-  .microslider-wrapper{
-  background: url('<?php echo Image::getFileImage($data['meta_tree']['keys']['intro_image']['value']);?>') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-position: 0px -150px;
-  }
-  </style>
-  <div class="microslider-wrapper">
-  <div class="page-name-wrapper">
-  <span class="page-name"><span class="name"><?php echo $data['meta_tree']['keys']['intro_name']['value']; ?></span></span>
-  </div>
-  </div>
- */ ?>
 <style>
     .microslider-wrapper.inside-carousel{
         background: transparent;

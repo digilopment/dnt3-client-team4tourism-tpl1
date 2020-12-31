@@ -11,4 +11,5 @@ class defaultModulController
 
 }
 
-defaultModulController::run();
+$modul = new defaultModulController();
+$modul->run();

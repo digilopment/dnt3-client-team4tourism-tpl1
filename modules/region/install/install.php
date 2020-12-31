@@ -5,11 +5,12 @@ use DntLibrary\Base\Vendor;
 function defaultModuleMetaDataConfiguration($postId, $service)
 {
 
+	$vendor = new Vendor();
     $defaultContent = "Content";
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "name",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -21,7 +22,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "text_1",
         '`value`' => $defaultContent,
         '`content_type`' => "content",
@@ -33,7 +34,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "text_2",
         '`value`' => $defaultContent,
         '`content_type`' => "content",
@@ -45,7 +46,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "galeria_1",
         '`value`' => $defaultContent,
         '`content_type`' => "image",
@@ -57,7 +58,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "mapa",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -69,7 +70,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "youtube_embed",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -82,7 +83,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "adresa",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -94,7 +95,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "email",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -106,7 +107,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "tel_c",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -118,7 +119,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "web",
         '`value`' => $defaultContent,
         '`content_type`' => "text",

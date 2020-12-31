@@ -18,4 +18,5 @@ class articleListModulController
 
 }
 
-articleListModulController::run();
+$modul = new articleListModulController();
+$modul->run();

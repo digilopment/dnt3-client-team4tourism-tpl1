@@ -15,4 +15,6 @@ class homepageModulController
 
 }
 
-homepageModulController::run();
+
+$modul = new partneriModulController();
+$modul->run();
