@@ -5,11 +5,12 @@ use DntLibrary\Base\Vendor;
 function defaultModuleMetaDataConfiguration($postId, $service)
 {
 
+	$vendor = new Vendor();
     $defaultContent = "Content";
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "intro_name",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -21,7 +22,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "intro_perex",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -33,7 +34,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "intro_content",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -45,7 +46,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "intro_image",
         '`value`' => $defaultContent,
         '`content_type`' => "image",
@@ -57,7 +58,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "intro_bg_image",
         '`value`' => $defaultContent,
         '`content_type`' => "image",

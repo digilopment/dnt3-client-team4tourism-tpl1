@@ -119,13 +119,14 @@ function modulesConfig()
 
 function websettings()
 {
+	$vendor = new Vendor();
     $insertedData[] = array(
         '`type`' => "social_wall",
         '`key`' => "facebook_page_sw",
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Facebook Page Social Wall",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -135,7 +136,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Facebook Post Social Wall",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -145,7 +146,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Instagram Post Social Wall",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -155,7 +156,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Youtube Social Wall",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -165,7 +166,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Twitter Social Wall",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -175,7 +176,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Api key pre Send grid",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -185,7 +186,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Template ID pre Send grid",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -195,7 +196,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "text",
         '`description`' => "Automatické odosielanie voucherov",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
@@ -205,7 +206,7 @@ function websettings()
         '`value`' => "",
         '`content_type`' => "bool",
         '`description`' => "Skryť informácie a preklik na registráciu v pravom stĺpci",
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '70',
     );

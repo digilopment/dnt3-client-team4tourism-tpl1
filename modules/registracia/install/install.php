@@ -4,12 +4,13 @@ use DntLibrary\Base\Vendor;
 
 function defaultModuleMetaDataConfiguration($postId, $service)
 {
-
+	
+	$vendor = new Vendor();
     $defaultContent = "Content";
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_base_name",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -21,7 +22,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_base_surname",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -33,7 +34,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_base_psc",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -45,7 +46,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_base_city",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -57,7 +58,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_base_email",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -69,7 +70,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_base_tel_c",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -81,7 +82,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_extend_v1_doklad",
         '`value`' => $defaultContent,
         '`content_type`' => "text",
@@ -93,7 +94,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_extend_v2_otazka",
         '`value`' => "Napíšte farbu vášho PC",
         '`content_type`' => "text",
@@ -105,7 +106,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_extend_v3_otazka",
         '`value`' => "Je toto modré?",
         '`content_type`' => "text",
@@ -117,7 +118,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_extend_v3_odpoved_a",
         '`value`' => "áno",
         '`content_type`' => "text",
@@ -129,7 +130,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_extend_v3_odpoved_b",
         '`value`' => "nie",
         '`content_type`' => "text",
@@ -141,7 +142,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_extend_v3_odpoved_c",
         '`value`' => "možno",
         '`content_type`' => "text",
@@ -153,7 +154,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_base_custom_1",
         '`value`' => "Místo nákupu - zadejte",
         '`content_type`' => "text",
@@ -165,7 +166,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_user_image_1",
         '`value`' => "AKO PRÁZDNINY? - foto",
         '`content_type`' => "text",
@@ -177,7 +178,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "sent_confirm_mail",
         '`value`' => "1",
         '`content_type`' => "bool",
@@ -189,7 +190,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "email_conf_sent_text",
         '`value`' => "odoslané",
         '`content_type`' => "text",
@@ -201,7 +202,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "field_word_povinne_polia",
         '`value`' => "Povinné polia",
         '`content_type`' => "text",
@@ -213,7 +214,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "email_conf_char",
         '`value`' => "8",
         '`content_type`' => "text",
@@ -225,7 +226,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_file_podmienky_1",
         '`value`' => "",
         '`content_type`' => "file",
@@ -237,7 +238,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_file_newsletter_1",
         '`value`' => "",
         '`content_type`' => "file",
@@ -249,7 +250,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_file_newsletter_2",
         '`value`' => "",
         '`content_type`' => "file",
@@ -261,7 +262,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_file_newsletter_3",
         '`value`' => "",
         '`content_type`' => "file",
@@ -273,7 +274,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_embed_newsletter_1",
         '`value`' => "",
         '`content_type`' => "text",
@@ -285,7 +286,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_embed_newsletter_2",
         '`value`' => "",
         '`content_type`' => "text",
@@ -297,7 +298,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "form_embed_newsletter_3",
         '`value`' => "",
         '`content_type`' => "text",
@@ -309,7 +310,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "email_sender",
         '`value`' => "",
         '`content_type`' => "text",
@@ -321,7 +322,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "email_subject",
         '`value`' => "",
         '`content_type`' => "text",
@@ -333,7 +334,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "enable_registration",
         '`value`' => "",
         '`content_type`' => "no_input",
@@ -345,7 +346,7 @@ function defaultModuleMetaDataConfiguration($postId, $service)
     $insertedData[] = array(
         '`post_id`' => $postId,
         '`service`' => $service,
-        '`vendor_id`' => Vendor::getId(),
+        '`vendor_id`' => $vendor->getId(),
         '`key`' => "koniec_registracie",
         '`value`' => "",
         '`content_type`' => "content",

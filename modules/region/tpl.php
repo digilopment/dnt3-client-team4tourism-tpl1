@@ -4,9 +4,14 @@ use DntLibrary\Base\Dnt;
 use DntLibrary\Base\Frontend;
 use DntLibrary\Base\Image;
 use DntLibrary\Base\Vendor;
-?><?php
-$layout = Vendor::getLayout();
-$data = Frontend::get();
+
+$frontend = new Frontend();
+$vendor = new Vendor();
+$dnt = new Dnt();
+$image = new Image();
+
+$data = $frontend->get();
+$layout = $vendor->getLayout();
 include "dnt-view/layouts/" . $layout . "/tpl_functions.php";
 include "dnt-view/layouts/" . $layout . "/top.php";
 ?>
@@ -18,7 +23,7 @@ include "dnt-view/layouts/" . $layout . "/top.php";
 <?php /* get_slider($data, 303); */ ?>
 <?php
 $googleMapsUrl = $data['meta_settings']['keys']['google_map']['value'];
-$mapLocation = Dnt::getMapLocation($googleMapsUrl);
+$mapLocation = $dnt->getMapLocation($googleMapsUrl);
 $map_first = $mapLocation[0];
 $map_second = $mapLocation[1];
 $map_zoom = $mapLocation[2];
@@ -53,7 +58,7 @@ $map_zoom = $mapLocation[2];
 $GALLERY = explode(",", $data['meta_tree']['keys']['galeria_1']['value']);
 $PHOTOS = array();
 foreach ($GALLERY as $item) {
-    $PHOTOS[] = Image::getFileImage($item);
+    $PHOTOS[] = $image->getFileImage($item);
 }
 ?>
 <div class="container margin-bottom-40">
@@ -98,45 +103,45 @@ foreach ($GALLERY as $item) {
                         </div>
                     </div>
                     <div class="row service-boxes margin-top-20 margin-bottom-20">
-                        <?php if (Frontend::getMetaTree($data, "adresa")) { ?>
+                        <?php if ($frontend->getMetaTree($data, "adresa")) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-location-arrow wow bounceIn" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceIn;"></i>
                                       <h3></h3> */ ?>
-                                    <p class="text-muted"><?php echo Frontend::getMetaTree($data, "adresa"); ?></p>
+                                    <p class="text-muted"><?php echo $frontend->getMetaTree($data, "adresa"); ?></p>
                                 </div>
                             </div>
                         <?php } ?>
-                        <?php if (Frontend::getMetaTree($data, "email")) { ?>
+                        <?php if ($frontend->getMetaTree($data, "email")) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-heart wow bounceIn" style="visibility: visible; animation-name: bounceIn;"></i><h3></h3> */ ?>
                                     <p class="text-muted">
-                                        <a href="mailto:<?php echo Frontend::getMetaTree($data, "email"); ?>">
-                                            <?php echo Frontend::getMetaTree($data, "email"); ?>
+                                        <a href="mailto:<?php echo $frontend->getMetaTree($data, "email"); ?>">
+                                            <?php echo $frontend->getMetaTree($data, "email"); ?>
                                         </a>
                                     </p>
                                 </div>
                             </div>
                         <?php } ?>
-                        <?php if (Frontend::getMetaTree($data, "tel_c")) { ?>
+                        <?php if ($frontend->getMetaTree($data, "tel_c")) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-paper-plane-o wow bounceIn" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
                                       <h3></h3> */ ?>
                                     <p class="text-muted">
-                                        <?php echo Frontend::getMetaTree($data, "tel_c"); ?>
+                                        <?php echo $frontend->getMetaTree($data, "tel_c"); ?>
                                     </p>
                                 </div>
                             </div>
                         <?php } ?>
-                        <?php if (Frontend::getMetaTree($data, "web")) { ?>
+                        <?php if ($frontend->getMetaTree($data, "web")) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-globe wow bounceIn" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceIn;"></i>
                                       <h3></h3> */ ?>
-                                    <p class="text-muted"><a target="_blank" href="<?php echo Frontend::getMetaTree($data, "web"); ?>">
-                                            <?php echo Dnt::linkFormat(Frontend::getMetaTree($data, "web")); ?>
+                                    <p class="text-muted"><a target="_blank" href="<?php echo $frontend->getMetaTree($data, "web"); ?>">
+                                            <?php echo $dnt->linkFormat($frontend->getMetaTree($data, "web")); ?>
                                         </a></p>
                                 </div>
                             </div>
@@ -168,7 +173,7 @@ $pocet = count($GALLERY);
 $index = rand(0, $pocet - 1);
 $PHOTOS = array();
 if ($pocet > 0) {
-    get_paralax(Image::getFileImage($GALLERY[$index]), $data['article']['name']);
+    get_paralax($image->getFileImage($GALLERY[$index]), $data['article']['name']);
 }
 ?>
 <?php get_footer($data); ?>

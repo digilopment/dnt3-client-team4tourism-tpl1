@@ -8,9 +8,15 @@ use DntLibrary\Base\MultyLanguage;
 use DntLibrary\Base\Rest;
 use DntLibrary\Base\Vendor;
 
-?><?php
-   $data = Frontend::get();
-   $layout = Vendor::getLayout();
+$frontend = new Frontend();
+$vendor = new Vendor();
+$dnt = new Dnt();
+$image = new Image();
+$multiLanguage = new Multylanguage();
+$rest = new Rest();
+
+$data = $frontend->get();
+$layout = $vendor->getLayout();
    include "dnt-view/layouts/".$layout."/tpl_functions.php";
    include "dnt-view/layouts/".$layout."/top.php"; 
    ?>
@@ -48,7 +54,7 @@ use DntLibrary\Base\Vendor;
 <?php /*get_slider($data, 303);*/ 
    $FORM_BASE_VALUE = array();
    foreach(array_keys($data['meta_tree']['keys']) as $key){
-   	if(Dnt::in_string("form_base", $key)){
+   	if($dnt->in_string("form_base", $key)){
    		if($data['meta_tree']['keys'][$key]['show'] == 1){
    			$FORM_BASE_VALUE[$key] = $data['meta_tree']['keys'][$key];
    		}
@@ -107,16 +113,16 @@ use DntLibrary\Base\Vendor;
                         messages: {
                             <?php foreach($FORM_BASE_VALUE as $key => $form){
                                   if($key != "form_base_tel_c"){ ?>
-                            <?php echo $key; ?>: "<?php echo MultyLanguage::translate($data, "field_word_err", "translate");?> ^",
+                            <?php echo $key; ?>: "<?php echo $multiLanguage->translate($data, "field_word_err", "translate");?> ^",
                             <?php } ?>
                             <?php } ?>
-                            podmienky: "<?php echo Multylanguage::translate($data, "field_word_err", "translate");?> ^",
+                            podmienky: "<?php echo $multiLanguage->translate($data, "field_word_err", "translate");?> ^",
                             <?php if(
                                   $data['meta_tree']['keys']['form_extend_v1_doklad']['show'] == 1 || 
                                   $data['meta_tree']['keys']['form_extend_v2_otazka']['show'] == 1 || 
                                   $data['meta_tree']['keys']['form_extend_v3_otazka']['show'] == 1 
                                   ){?>
-                            ans: "<?php echo Multylanguage::translate($data, "field_word_err", "translate");?> ^",
+                            ans: "<?php echo $multiLanguage->translate($data, "field_word_err", "translate");?> ^",
                             <?php } ?>
                             <?php if($data['meta_tree']['keys']['form_user_image_1']['show'] == 1){ ?>
                             form_user_image_1: "Prosím vyberte fotku na upload. Fotka musí byť vo formáte jpg, jpeg, png, alebo gif",
@@ -126,10 +132,10 @@ use DntLibrary\Base\Vendor;
 
                             $.ajax({
                                 // Your server script to process the upload
-								<?php if(MultyLanguage::getLang() == "0"){ ?>
+								<?php if($multiLanguage->getLang() == "0"){ ?>
                                 url: "<?php echo WWW_PATH; ?>rpc/json/competition-register/<?php echo $data['post_id']?>",
 								<?php }else{?>
-								url: "<?php echo WWW_PATH.MultyLanguage::getLang(); ?>/rpc/json/competition-register/<?php echo $data['post_id']?>",
+								url: "<?php echo WWW_PATH.$multiLanguage->getLang(); ?>/rpc/json/competition-register/<?php echo $data['post_id']?>",
 								<?php } ?>
                                 type: 'POST',
 
@@ -185,7 +191,7 @@ use DntLibrary\Base\Vendor;
                     }
                 });
             </script> 
-			<?php if(Vendor::getColumn("in_progress") == 1){?>
+			<?php if($vendor->getColumn("in_progress") == 1){?>
             <div class="containers">
                <div class="row">
                   <div class="col-md-12">
@@ -270,8 +276,8 @@ use DntLibrary\Base\Vendor;
                            <?php if($data['meta_tree']['keys']['form_file_podmienky_1']['show'] == 1){ ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
-                                 <a target="_blank" href="<?php echo Image::getFileImage($data['meta_tree']['keys']['form_file_podmienky_1']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "suhlas_s_podmienkami_1", "translate");?>
+                                 <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_podmienky_1']['value']); ?>">
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_podmienkami_1", "translate");?>
                                  </a><span class="povinne">*</span>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
@@ -283,8 +289,8 @@ use DntLibrary\Base\Vendor;
                            <?php if($data['meta_tree']['keys']['form_file_newsletter_1']['show'] == 1){ ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
-                                 <a target="_blank" href="<?php echo Image::getFileImage($data['meta_tree']['keys']['form_file_newsletter_1']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "suhlas_s_newslettrom_1", "translate");?>
+                                 <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_newsletter_1']['value']); ?>">
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_newslettrom_1", "translate");?>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
                                  <input type="checkbox" name="newsletter_1" >
@@ -295,8 +301,8 @@ use DntLibrary\Base\Vendor;
                            <?php if($data['meta_tree']['keys']['form_file_newsletter_2']['show'] == 1){ ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
-                                 <a target="_blank" href="<?php echo Image::getFileImage($data['meta_tree']['keys']['form_file_newsletter_2']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "suhlas_s_newslettrom_2", "translate");?>
+                                 <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_newsletter_2']['value']); ?>">
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_newslettrom_2", "translate");?>
                                  </a>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
@@ -308,8 +314,8 @@ use DntLibrary\Base\Vendor;
                            <?php if($data['meta_tree']['keys']['form_file_newsletter_3']['show'] == 1){ ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
-                                 <a target="_blank" href="<?php echo Image::getFileImage($data['meta_tree']['keys']['form_file_newsletter_3']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "suhlas_s_newslettrom_3", "translate");?>
+                                 <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_newsletter_3']['value']); ?>">
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_newslettrom_3", "translate");?>
                                  </a>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
@@ -322,10 +328,10 @@ use DntLibrary\Base\Vendor;
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
 								 <?php if(empty($data['meta_tree']['keys']['form_embed_newsletter_1']['value'])){ ?>
-									<?php echo Multylanguage::translate($data, "text_newsletter_embed_1", "translate");?>
+									<?php echo $multiLanguage->translate($data, "text_newsletter_embed_1", "translate");?>
 								  <?php }else{ ?>
 									 <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_1']['value']; ?>">
-									<i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "text_newsletter_embed_1", "translate");?>
+									<i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "text_newsletter_embed_1", "translate");?>
 									</a>
 								  <?php }?>
                               </div>
@@ -339,10 +345,10 @@ use DntLibrary\Base\Vendor;
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
                                  <?php if(empty($data['meta_tree']['keys']['form_embed_newsletter_2']['value'])){ ?>
-									<?php echo Multylanguage::translate($data, "text_newsletter_embed_2", "translate");?>
+									<?php echo $multiLanguage->translate($data, "text_newsletter_embed_2", "translate");?>
 								  <?php }else{ ?>
 									 <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_2']['value']; ?>">
-									<i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "text_newsletter_embed_2", "translate");?>
+									<i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "text_newsletter_embed_2", "translate");?>
 									</a>
 								  <?php }?>
                               </div>
@@ -356,10 +362,10 @@ use DntLibrary\Base\Vendor;
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
                                 <?php if(empty($data['meta_tree']['keys']['form_embed_newsletter_3']['value'])){ ?>
-									<?php echo Multylanguage::translate($data, "text_newsletter_embed_3", "translate");?>
+									<?php echo $multiLanguage->translate($data, "text_newsletter_embed_3", "translate");?>
 								  <?php }else{ ?>
 									 <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_3']['value']; ?>">
-									<i class="fa fa-external-link"></i> <?php echo Multylanguage::translate($data, "text_newsletter_embed_3", "translate");?>
+									<i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "text_newsletter_embed_3", "translate");?>
 									</a>
 								  <?php }?>
                               </div>
@@ -377,7 +383,7 @@ use DntLibrary\Base\Vendor;
                               ?>
                            <div class="row captcha">
                               <div class="col-xs-12 col-md-5">
-                                 <label><?php echo Multylanguage::translate($data, "captcha", "translate");?><span class="povinne">*</span></label>
+                                 <label><?php echo $multiLanguage->translate($data, "captcha", "translate");?><span class="povinne">*</span></label>
                               </div>
                               <div class="col-xs-12 col-md-7">
                                  <?php echo $captcha; ?>
@@ -388,7 +394,7 @@ use DntLibrary\Base\Vendor;
                               </div>
                               <div class="col-xs-12 col-md-7">
 									<br/>
-                                 <label><span class="povinne">* </span><?php echo Multylanguage::translate($data, "field_word_err", "translate");?></label>
+                                 <label><span class="povinne">* </span><?php echo $multiLanguage->translate($data, "field_word_err", "translate");?></label>
                               </div>
                            </div>
                            <?php } ?>
@@ -396,7 +402,7 @@ use DntLibrary\Base\Vendor;
                               <div class="col-xs-12 col-md-5">
                               </div>
                               <div class="col-xs-12 col-md-7">
-                                 <input class="btn btn-u btn-lg " type="submit" name="sent" value="<?php echo Multylanguage::translate($data, "odoslat_btn", "translate");?>">
+                                 <input class="btn btn-u btn-lg " type="submit" name="sent" value="<?php echo $multiLanguage->translate($data, "odoslat_btn", "translate");?>">
                               </div>
                            </div>
                         </form>
@@ -404,12 +410,12 @@ use DntLibrary\Base\Vendor;
                            <div class="row">
                               <div class="col-md-12">
 									 <div class="text-center thankyou-reg">
-										 <?php echo Multylanguage::translate($data, "thankyou_for_registration", "translate");?>
+										 <?php echo $multiLanguage->translate($data, "thankyou_for_registration", "translate");?>
 										 <br/>
 										 <br/>
-										 <p><?php echo Multylanguage::translate($data, "nova_registracia", "translate");?></p>
-										 <a class="btn btn-lg btn-color mlr-10" href="<?php echo Rest::getModulUrl("registracia"); ?>" style="margin-top: 10px;">
-										 <span class="btn-u"><?php echo Multylanguage::translate($data, "registracia", "translate");?></span>
+										 <p><?php echo $multiLanguage->translate($data, "nova_registracia", "translate");?></p>
+										 <a class="btn btn-lg btn-color mlr-10" href="<?php echo $rest->getModulUrl("registracia"); ?>" style="margin-top: 10px;">
+										 <span class="btn-u"><?php echo $multiLanguage->translate($data, "registracia", "translate");?></span>
 										 </a>
 									</div>
                               </div>

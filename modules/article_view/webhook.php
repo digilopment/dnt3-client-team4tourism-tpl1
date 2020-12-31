@@ -13,14 +13,17 @@ class articleViewModulController
     {
         $article = new ArticleView;
         $rest = new Rest;
+        $settings = new Settings;
+        $vendor = new Vendor;
+        $adminContent = new AdminContent;
 
         $id = $rest->webhook(3);
 
-        $show = AdminContent::getPostParam("show", $id);
+        $show = $adminContent->getPostParam("show", $id);
         if ($show > 0) {
             $custom_data = array(
                 "post_id" => $id,
-                "title" => $article->getPostParam("name", $id) . " | " . Settings::get("title"),
+                "title" => $article->getPostParam("name", $id) . " | " . $settings->get("title"),
                 "meta" => array(
                     '<meta name="keywords" content="' . $article->getPostParam("tags", $id) . '" />',
                     '<meta name="description" content="' . $article->getPostParam("name", $id) . '" />',
@@ -32,10 +35,11 @@ class articleViewModulController
             );
             include "tpl.php";
         } else {
-            include "dnt-view/layouts/" . Vendor::getLayout() . "/modules/default/tpl.php";
+            include "dnt-view/layouts/" . $vendor->getLayout() . "/modules/default/tpl.php";
         }
     }
 
 }
 
-articleViewModulController::run();
+$modul = new partneriModulController();
+$modul->run();

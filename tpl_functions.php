@@ -17,15 +17,13 @@ use DntLibrary\Base\Webhook;
 <?php
 
 function color_conf($data) {
-    //$color = $data['']
-    //var_dump($data['meta_settings']['keys']['color']['value']);
-    //$colorInverse = Dnt::colorInverse($color);
-
+	$dnt = new Dnt();
+	
     $color = $data['meta_settings']['keys']['color']['value'];
-    $colorRGBA = Dnt::hex2rgba($color, 0.85);
-    $colorDarken4 = Dnt::darkenColor($color, 4);
-    $colorDarken2 = Dnt::darkenColor($color, 2);
-    $colorDarken2RGBA = Dnt::hex2rgba($color, 0.7);
+    $colorRGBA = $dnt->hex2rgba($color, 0.85);
+    $colorDarken4 = $dnt->darkenColor($color, 4);
+    $colorDarken2 = $dnt->darkenColor($color, 2);
+    $colorDarken2RGBA = $dnt->hex2rgba($color, 0.7);
     $reverseTextColor = "#ffffff";
     echo '<style>
    
@@ -325,13 +323,15 @@ function color_conf($data) {
 <?php
 
 function get_top($data) {
+		$frontend = new Frontend();
+		$settings = new Settings();
     ?>
     <!DOCTYPE html>
     <!--[if IE 9]> 
     <html lang="sk" class="ie9">
        <![endif]-->
     <!--[if !IE]><!--> 
-    <html lang="<?php echo Frontend::getMetaSetting($data, "language"); ?>">
+    <html lang="<?php echo $frontend->getMetaSetting($data, "language"); ?>">
         <!--<![endif]-->
         <head>
             <meta charset="utf-8">
@@ -344,7 +344,7 @@ function get_top($data) {
             <meta name="author" content="designdnt">
             <meta name="viewport" content="width=device-width" />
             <?php
-            $favicon = Settings::getImage($data['meta_settings']['keys']['favicon']['value']);
+            $favicon = $settings->getImage($data['meta_settings']['keys']['favicon']['value']);
             ?>
             <!-- Favicone Icon -->
             <link rel="" type="img/x-icon" href="<?php echo $favicon; ?>" />
@@ -427,10 +427,8 @@ function get_top($data) {
 <?php } ?><?php
 
 function get_top_lista($data) {
-    $multylanguage = new MultyLanguage;
-    $db = new DB;
+    $multiLanguage = new MultyLanguage;
     $webhook = new Webhook;
-    $rest = new Rest;
     $searchUrl = $webhook->getSitemapModules("search");
     ?>
     <div class="blog-topbar">
@@ -438,7 +436,7 @@ function get_top_lista($data) {
             <div class="container">
                 <form action="<?php echo $searchUrl[0] ?>">
                     <input type="text" name="q" class="form-control" 
-                           placeholder="<?php echo MultyLanguage::translate($data, "text_to_search", "translate"); ?>">
+                           placeholder="<?php echo $multiLanguage->translate($data, "text_to_search", "translate"); ?>">
                     <div class="search-close"><i class="fa fa-times" aria-hidden="true"></i></div>
                 </form>
             </div>
@@ -451,9 +449,9 @@ function get_top_lista($data) {
                             <li><a href="<?php echo WWW_PATH; ?>"><i class="fa fa-2x fa-home"></i></a></li>
                             <?php
 							//var_dump($data['post_id']);
-                            $lngArr = MultyLanguage::activeVendorLangs();
+                            $lngArr = $multiLanguage->activeVendorLangs();
                             if (count($lngArr) > 1) {
-                                foreach (MultyLanguage::activeVendorLangs() as $lg) {
+                                foreach ($multiLanguage->activeVendorLangs() as $lg) {
                                     $urlLg = WWW_PATH . "" . $lg . "/a/" . $data['post_id'];
                                     ?>
                                     <li>
@@ -482,10 +480,11 @@ function get_top_lista($data) {
 <?php } ?><?php
 
 function get_nav_menu($data) {
-    $multylanguage = new MultyLanguage;
+    $multiLanguage = new MultyLanguage;
+    $settings = new Settings;
+    $navigation = new Navigation;
     $article = new ArticleView;
     $rest = new Rest;
-    $db = new DB;
     ?>	
     <!-- Navbar -->
     <div class="navbar mega-menu" role="navigation">
@@ -500,9 +499,9 @@ function get_nav_menu($data) {
                 </button>
                 <div class="navbar-brand">
                     <?php
-                    $logo_firmy = Settings::getImage($data['meta_settings']['keys']['logo_firmy']['value']);
-                    $logo_firmy_2 = Settings::getImage($data['meta_settings']['keys']['logo_firmy_2']['value']);
-                    $logo_firmy_3 = Settings::getImage($data['meta_settings']['keys']['logo_firmy_3']['value']);
+                    $logo_firmy = $settings->getImage($data['meta_settings']['keys']['logo_firmy']['value']);
+                    $logo_firmy_2 = $settings->getImage($data['meta_settings']['keys']['logo_firmy_2']['value']);
+                    $logo_firmy_3 = $settings->getImage($data['meta_settings']['keys']['logo_firmy_3']['value']);
 
                     $logo_url = $data['meta_settings']['keys']['logo_url']['value'];
                     $logo_url_2 = $data['meta_settings']['keys']['logo_url_2']['value'];
@@ -532,7 +531,7 @@ function get_nav_menu($data) {
                     <ul class="nav navbar-nav">
                         <!-- Home -->
                         <?php
-                        foreach (Navigation::getParents() as $row) {
+                        foreach ($navigation->getParents() as $row) {
                             //$name_url_1 = $article->getPostParam("name_url", $row['id_entity'], false);
                             $name_url_1 = $row['name_url'];
                             ?>
@@ -546,10 +545,10 @@ function get_nav_menu($data) {
                                 <?php } else { ?>
                                     <a  href="<?php echo $name_url_1; ?>"><?php echo $article->getPostParam("name", $row['id_entity']); ?></a>
                                     <?php } ?>
-                                    <?php if (Navigation::hasChild($row['id_entity'])) { ?>
+                                    <?php if ($navigation->hasChild($row['id_entity'])) { ?>
                                     <ul class="dropdown-menu">
                                         <?php
-                                        foreach (Navigation::getChildren($row['id_entity']) as $row2) {
+                                        foreach ($navigation->getChildren($row['id_entity']) as $row2) {
                                             //$name_url_2 = $article->getPostParam("name_url", $row2['id_entity'], false);
                                             $name_url_2 = $row2['name_url'];
                                             ?>
@@ -578,6 +577,8 @@ function get_nav_menu($data) {
     <!--=== Footer v8 ===-->
     <div class="footer-v8">
         <?php
+		
+		$multiLanguage = new MultyLanguage();
         $fbPage = $data['meta_settings']['keys']['facebook_page_sw']['value'];
         $fbPost = $data['meta_settings']['keys']['facebook_post_sw']['value'];
         $fbWidht = "400";
@@ -671,7 +672,7 @@ function get_nav_menu($data) {
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
-                        <h2><?php echo Multylanguage::translate($data, "socialne_siete", "translate"); ?></h2>
+                        <h2><?php echo $multiLanguage->translate($data, "socialne_siete", "translate"); ?></h2>
                         <!-- Social Icons -->
                         <ul class="social-icon-list margin-bottom-20">
                                 <?php if ($data['meta_settings']['keys']['facebook_page']['show'] == 1) { ?>
@@ -729,20 +730,20 @@ function get_nav_menu($data) {
                 <ul class="list-inline terms-menu">
                     <li>
                         <a href="<?php echo WWW_PATH ?>">
-                         <?php echo Multylanguage::translate($data, "footer_signature", "translate"); ?> <?php echo date("Y"); ?>
+                         <?php echo $multiLanguage->translate($data, "footer_signature", "translate"); ?> <?php echo date("Y"); ?>
                         </a>
                     </li>
                         <?php if ($data['meta_settings']['keys']['impressum']['show'] == 1) { ?>						
                         <li>
                             <a href="<?php echo $data['meta_settings']['keys']['impressum']['value'] ?>" target="_blank">
-                        <?php echo Multylanguage::translate($data, "impressum", "translate"); ?>
+                        <?php echo $multiLanguage->translate($data, "impressum", "translate"); ?>
                             </a>
                         </li>
                         <?php } ?>
                         <?php if ($data['meta_settings']['keys']['data_protection']['show'] == 1) { ?>
                         <li>
                             <a href="<?php echo $data['meta_settings']['keys']['data_protection']['value'] ?>" target="_blank">
-                                <?php echo Multylanguage::translate($data, "data_protection", "translate"); ?>
+                                <?php echo $multiLanguage->translate($data, "data_protection", "translate"); ?>
                             </a>
                         </li>
                         <?php } ?>
@@ -754,7 +755,14 @@ function get_nav_menu($data) {
     <!--=== End Footer v8 ===-->
 <?php } ?><?php
 
-function col_right($data) { ?>
+function col_right($data) { 
+	$multiLanguage = new MultyLanguage();
+	$rest = new Rest();
+	$frontend = new Frontend();
+	$settings = new Settings();
+	$articleView = new ArticleView();
+	$image = new Image();
+?>
     <!-- Blog Thumb v3 -->
     <div class="margin-bottom-50 dalsie-info">
         <h2 class="title-v4 ">Menu</h2>
@@ -776,13 +784,13 @@ function col_right($data) { ?>
     </div>
     <!-- nastrojaren -->
     <div class="margin-bottom-50 dalsie-info">
-        <h2 class="title-v4 "><?php echo Multylanguage::translate($data, "partneri", "translate"); ?></h2>
+        <h2 class="title-v4 "><?php echo $multiLanguage->translate($data, "partneri", "translate"); ?></h2>
         <div class="blog-thumb-v3">
             <ul class="logos">
                 <?php
-                $logo_firmy = Settings::getImage($data['meta_settings']['keys']['logo_firmy']['value']);
-                $logo_firmy_2 = Settings::getImage($data['meta_settings']['keys']['logo_firmy_2']['value']);
-                $logo_firmy_3 = Settings::getImage($data['meta_settings']['keys']['logo_firmy_3']['value']);
+                $logo_firmy = $settings->getImage($data['meta_settings']['keys']['logo_firmy']['value']);
+                $logo_firmy_2 = $settings->getImage($data['meta_settings']['keys']['logo_firmy_2']['value']);
+                $logo_firmy_3 = $settings->getImage($data['meta_settings']['keys']['logo_firmy_3']['value']);
 
                 $logo_url = $data['meta_settings']['keys']['logo_url']['value'];
                 $logo_url_2 = $data['meta_settings']['keys']['logo_url_2']['value'];
@@ -812,13 +820,13 @@ function col_right($data) { ?>
             </ul>
         </div>
     </div>
-	<?php if(!Frontend::getMetaSettingBool($data, 'hide_registration_info')){?>
+	<?php if(!$frontend->getMetaSettingBool($data, 'hide_registration_info')){?>
     <div class="margin-bottom-50 dalsie-info">
-        <h2 class="title-v4 "><?php echo Multylanguage::translate($data, "registracia", "translate"); ?></h2>
+        <h2 class="title-v4 "><?php echo $multiLanguage->translate($data, "registracia", "translate"); ?></h2>
         <div class="blog-thumb-v3">
             <ul class="col-right logos">
                 <li>
-                    <a href="<?php echo Rest::getModulUrl("registracia"); ?>"><span class="btn-u"><?php echo Multylanguage::translate($data, "registracia", "translate"); ?></span></a>
+                    <a href="<?php echo $rest->getModulUrl("registracia"); ?>"><span class="btn-u"><?php echo $multiLanguage->translate($data, "registracia", "translate"); ?></span></a>
                 </li>
             </ul>
         </div>
@@ -826,22 +834,22 @@ function col_right($data) { ?>
 	<?php } ?>
     <!-- End Blog Thumb v3 -->
     <!-- Social Shares -->
-	<?php if(!Frontend::getMetaSettingBool($data, 'hide_registration_info')){?>
+	<?php if(!$frontend->getMetaSettingBool($data, 'hide_registration_info')){?>
     <div class="margin-bottom-50">
-        <h2 class="title-v4"><?php echo Multylanguage::translate($data, "pravidla_sutaze", "translate"); ?></h2>
+        <h2 class="title-v4"><?php echo $multiLanguage->translate($data, "pravidla_sutaze", "translate"); ?></h2>
         <ul class="blog-social-shares">
             <?php
             $webhook = new Webhook;
 
             $name_url = $webhook->getSitemapModules("registracia");
-            $regId = ArticleView::StaticViewParam("id_entity", $name_url[0]);
-            $customRegData = Frontend::get(false, $regId);
+            $regId = $articleView->StaticViewParam("id_entity", $name_url[0]);
+            $customRegData = $frontend->get(false, $regId);
             $pdfId = $customRegData['meta_tree']['keys']['form_file_podmienky_1']['value'];
             if ($customRegData['meta_tree']['keys']['form_file_podmienky_1']['show'] == 1) {
                 ?>
                 <li class="podmienky">
-                    <a href="<?php echo Image::getFileImage($pdfId) ?>" target="_blank">
-                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i><?php echo Multylanguage::translate($data, "suhlas_s_podmienkami_1", "translate"); ?>
+                    <a href="<?php echo $image->getFileImage($pdfId) ?>" target="_blank">
+                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i><?php echo $multiLanguage->translate($data, "suhlas_s_podmienkami_1", "translate"); ?>
                     </a>
                 </li>
             <?php } ?>
@@ -897,18 +905,20 @@ function col_right($data) { ?>
 <?php } ?><?php
 
 function get_slider_carousel($data, $dataType, $ids, $name, $text) {
+	        $db = new DB;
+        $article = new ArticleView;
+        $vendor = new Vendor;
+        $image = new Image;
     //$GALLERY = explode(",", $data['meta_tree']['keys']['galeria_1']['value']);
     $GALLERY = explode(",", $ids);
     $PHOTOS = array();
     if ($dataType == "ids") {
         foreach ($GALLERY as $item) {
-            $PHOTOS[] = Image::getFileImage($item);
+            $PHOTOS[] = $image->getFileImage($item);
         }
     } else {
-        $db = new DB;
-        $article = new ArticleView;
         $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND 
-      		cat_id = '" . $ids . "' AND vendor_id = '" . Vendor::getId() . "'";
+      		cat_id = '" . $ids . "' AND vendor_id = '" . $vendor->getId() . "'";
         if ($db->num_rows($query) > 0) {
             foreach ($db->get_results($query) as $row) {
                 $PHOTOS[] = $article->getPostImage($row['id_entity']);
@@ -968,18 +978,20 @@ function get_slider_carousel($data, $dataType, $ids, $name, $text) {
 }
 
 function get_slider_main_ids($data, $dataType, $ids, $name) {
-    //$GALLERY = explode(",", $data['meta_tree']['keys']['galeria_1']['value']);
+	$db = new DB;
+	$article = new ArticleView;
+	$vendor = new Vendor;
+	$image = new Image;
+	
     $GALLERY = explode(",", $ids);
     $PHOTOS = array();
     if ($dataType == "ids") {
         foreach ($GALLERY as $item) {
-            $PHOTOS[] = Image::getFileImage($item);
+            $PHOTOS[] = $image->getFileImage($item);
         }
     } else {
-        $db = new DB;
-        $article = new ArticleView;
         $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND 
-      		cat_id = '" . $ids . "' AND vendor_id = '" . Vendor::getId() . "'";
+      		cat_id = '" . $ids . "' AND vendor_id = '" . $vendor->getId() . "'";
         if ($db->num_rows($query) > 0) {
             foreach ($db->get_results($query) as $row) {
                 $PHOTOS[] = $article->getPostImage($row['id_entity']);
@@ -1048,11 +1060,13 @@ function get_slider_main_ids($data, $dataType, $ids, $name) {
 }
 
 function get_slider_main_db($data, $ids, $name) {
-    $multylanguage = new MultyLanguage;
+    $multiLanguage = new MultyLanguage;
     $article = new ArticleView;
+    $vendor = new Vendor;
     $db = new DB;
+    $dnt = new Dnt;
 
-    $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . $ids . "' AND vendor_id = '" . Vendor::getId() . "' AND `show` > 0";
+    $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . $ids . "' AND vendor_id = '" . $vendor->getId() . "' AND `show` > 0";
 
     if ($db->num_rows($query) > 0) {
         ?>
@@ -1064,14 +1078,14 @@ function get_slider_main_db($data, $ids, $name) {
                             <?php
                             $j = 0;
                             foreach ($db->get_results($query) as $row) {
-                                if (Dnt::is_external_url($row['name_url'])) {
+                                if ($dnt->is_external_url($row['name_url'])) {
                                     $nameUrl = $row['name_url'];
                                 } else {
                                     $nameUrl = false;
                                 }
                                 $image = $article->getPostImage($row['id_entity'], false, Image::MEDIUM);
-                                $perex = Dnt::not_html($row['perex']);
-                                $content = Dnt::not_html($row['content']);
+                                $perex = $dnt->not_html($row['perex']);
+                                $content = $dnt->not_html($row['content']);
                                 ?>
                                 <div class="item <?php
                                 if ($j == 0) {
@@ -1120,12 +1134,12 @@ function get_slider_main_db($data, $ids, $name) {
 }
 
 function get_slider($data) {
-    ?>
-    <?php
-    $multylanguage = new MultyLanguage;
+    $multiLanguage = new MultyLanguage;
     $article = new ArticleView;
+    $adminContent = new AdminContent;
     $db = new DB;
-    $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . AdminContent::getCatId("sliders") . "' AND vendor_id = '" . Vendor::getId() . "' AND `show` > 0";
+    $dnt = new Dnt;
+    $query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . $adminContent->getCatId("sliders") . "' AND vendor_id = '" . $vendor->getId() . "' AND `show` > 0";
     if ($db->num_rows($query) > 0) {
         ?>
         <!--<style>
@@ -1141,7 +1155,7 @@ function get_slider($data) {
             <div class="master-slider ms-skin-default" id="masterslider">
         <?php
         foreach ($db->get_results($query) as $row) {
-            if (Dnt::is_external_url($row['name_url'])) {
+            if ($dnt->is_external_url($row['name_url'])) {
                 $nameUrl = $row['name_url'];
             } else {
                 $nameUrl = false;

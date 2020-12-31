@@ -13,12 +13,18 @@ use DntLibrary\Base\MultyLanguage;
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
+
 $rest = new Rest();
 $db = new DB();
 $dntMailer = new Mailer;
+$frontend = new Frontend;
+$vendor = new Vendor;
+$dnt = new Dnt;
+$voucher = new Voucher;
+$multiLanguage = new MultyLanguage;
 
 $postId = $rest->webhook(4);
-$data = Frontend::get(false, $postId);
+$data = $frontend->get(false, $postId);
 $siteKey = $data['meta_settings']['keys']['gc_site_key']['value'];
 $secretKey = $data['meta_settings']['keys']['gc_secret_key']['value'];
 $gc = new GoogleCaptcha($siteKey, $secretKey);
@@ -81,8 +87,8 @@ if (isset($_POST['sent'])) {
         $table = "dnt_registred_users";
 
         $insertedData["`type`"] = "competitor-user";
-        $insertedData["`vendor_id`"] = Vendor::getId();
-        $insertedData["`datetime_creat`"] = Dnt::datetime();
+        $insertedData["`vendor_id`"] = $vendor->getId();
+        $insertedData["`datetime_creat`"] = $dnt->datetime();
 
 
         $insertedData["`name`"] = $form_base_name;
@@ -116,16 +122,16 @@ if (isset($_POST['sent'])) {
           } */
 
         $insertedData["`content`"] = $ans;
-        $insertedData["`ip_adresa`"] = Dnt::get_ip();
+        $insertedData["`ip_adresa`"] = $dnt->get_ip();
         $insertedData["`img`"] = $attachment;
 
         $db->dbTransaction();
         $db->insert($table, $insertedData);
-        $userId = Dnt::getLastId($table);
+        $userId = $dnt->getLastId($table);
         $db->dbcommit();
 
         if (isset($data['meta_settings']['keys']['automatic_voucher']['show']) && $data['meta_settings']['keys']['automatic_voucher']['show'] == 1) {
-            Voucher::assignLastVoucher($userId);
+            $voucher->assignLastVoucher($userId);
         }
 
 
@@ -134,7 +140,7 @@ if (isset($_POST['sent'])) {
          *
          *
          */
-        $msg = MultyLanguage::translate($data, "dakujeme_za_registraciu", "translate");
+        $msg = $multiLanguage->translate($data, "dakujeme_za_registraciu", "translate");
 
         if ($data['meta_tree']['keys']['email_sender']['show'] == 1 && $data['meta_tree']['keys']['email_subject']['show'] == 1) {
             $senderEmail = $data['meta_tree']['keys']['email_sender']['value'];

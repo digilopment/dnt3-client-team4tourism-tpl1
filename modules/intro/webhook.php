@@ -19,4 +19,5 @@ class introModulController
 
 }
 
-introModulController::run();
+$modul = new introModulController();
+$modul->run();

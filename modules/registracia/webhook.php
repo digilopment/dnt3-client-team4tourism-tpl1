@@ -19,4 +19,5 @@ class registraciaModulController
 
 }
 
-registraciaModulController::run();
+$modul = new registraciaModulController();
+$modul->run();

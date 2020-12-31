@@ -10,4 +10,5 @@ class cleanModulController
 
 }
 
-cleanModulController::run();
+$modul = new cleanModulController();
+$modul->run();

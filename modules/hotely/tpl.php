@@ -4,11 +4,15 @@ use DntLibrary\Base\Dnt;
 use DntLibrary\Base\Frontend;
 use DntLibrary\Base\Image;
 use DntLibrary\Base\Vendor;
-?><?php
-$data = Frontend::get();
-$layout = Vendor::getLayout();
-include "dnt-view/layouts/" . $layout . "/tpl_functions.php";
-include "dnt-view/layouts/" . $layout . "/top.php";
+$frontend = new Frontend();
+$vendor = new Vendor();
+$dnt = new Dnt();
+$image = new Image();
+
+$data = $frontend->get();
+$layout = $vendor->getLayout();
+include "dnt-view/layouts/".$layout."/tpl_functions.php";
+include "dnt-view/layouts/".$layout."/top.php"; 
 ?>
 <!-- End Header -->
 <?php get_slider_main_db($data, 303, "mainslider"); ?>
@@ -18,7 +22,7 @@ include "dnt-view/layouts/" . $layout . "/top.php";
 $RAW_DATA = $data['meta_tree']['keys'];
 $HOTELY = array();
 foreach ($RAW_DATA as $key => $item) {
-    if (Dnt::in_string("hotel_name", $key)) {
+    if ($dnt->in_string("hotel_name", $key)) {
         $HOTELY[] = $item['show'];
     }
 }
@@ -50,7 +54,7 @@ $COUNT_HOTEL = count($HOTELY);
                                                 } else {
                                                     $class = "other";
                                                 }
-                                                $img = Image::getFileImage($item);
+                                                $img = $image->getFileImage($item);
                                                 echo '<a class="example-image-link" href="' . $img . '" data-lightbox="gallery-' . $i . '">';
                                                 echo '<img class="modul-image img-responsive ' . $class . '" src="' . $img . '">';
                                                 echo '</a>';
@@ -106,7 +110,7 @@ $COUNT_HOTEL = count($HOTELY);
                                                     <?php /* <i class="fa fa-2x fa-globe wow bounceIn" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceIn;"></i> */ ?>
                                                     <h3></h3>
                                                     <p class="text-muted"><a target="_blank" href="<?php echo $data['meta_tree']['keys']['id_' . $i . '_web']['value']; ?>">
-                                                            <?php echo Dnt::linkFormat($data['meta_tree']['keys']['id_' . $i . '_web']['value']); ?>
+                                                            <?php echo $dnt->linkFormat($data['meta_tree']['keys']['id_' . $i . '_web']['value']); ?>
                                                         </a>
                                                     </p>
                                                 </div>

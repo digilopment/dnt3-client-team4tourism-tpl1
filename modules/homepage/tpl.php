@@ -5,14 +5,18 @@ use DntLibrary\Base\ArticleView;
 use DntLibrary\Base\Frontend;
 use DntLibrary\Base\MultyLanguage;
 use DntLibrary\Base\Vendor;
-?><?php
-include "dnt-view/layouts/" . Vendor::getLayout() . "/tpl_functions.php";
-$data = Frontend::get();
-get_top($data);
-$multylanguage = new MultyLanguage;
+
+$vendor = new Vendor();
+$frontend = new Frontend();
+$multiLanguage = new MultyLanguage;
+$adminContent = new AdminContent;
 $article = new ArticleView;
-$translate['citat_viac'] = MultyLanguage::translate($data, "citat_viac", "translate");
-include "dnt-view/layouts/" . Vendor::getLayout() . "/top.php";
+
+include "dnt-view/layouts/" . $vendor->getLayout() . "/tpl_functions.php";
+$data = $frontend->get();
+get_top($data);
+$translate['citat_viac'] = $multiLanguage->translate($data, "citat_viac", "translate");
+include "dnt-view/layouts/" . $vendor->getLayout() . "/top.php";
 ?>
 
 <!-- End header-v8 -->
@@ -23,7 +27,7 @@ include "dnt-view/layouts/" . Vendor::getLayout() . "/top.php";
             <div class="row">
 <?php
 $post_type = "texty-na-homepage";
-$query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . AdminContent::getCatId($post_type) . "' AND vendor_id = '" . Vendor::getId() . "'";
+$query = "SELECT * FROM dnt_posts WHERE type = 'post' AND cat_id = '" . $adminContent->getCatId($post_type) . "' AND vendor_id = '" . $vendor->getId() . "'";
 if ($db->num_rows($query) > 0) {
     foreach ($db->get_results($query) as $row) {
         ?>

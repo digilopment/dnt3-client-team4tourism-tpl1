@@ -2,12 +2,13 @@
 
 use DntLibrary\Base\Frontend;
 use DntLibrary\Base\Vendor;
-?><?php
-include "dnt-view/layouts/" . Vendor::getLayout() . "/tpl_functions.php";
-$data = Frontend::get($custom_data);
+$vendor = new Vendor();
+$frontend = new Frontend();
+include "dnt-view/layouts/" . $vendor->getLayout() . "/tpl_functions.php";
+$data = $frontend->get($custom_data);
 //$data = false;
 get_top($data);
-include "dnt-view/layouts/" . Vendor::getLayout() . "/top.php";
+include "dnt-view/layouts/" . $vendor->getLayout() . "/top.php";
 ?>
 <style type="text/css">
     .microslider-wrapper{

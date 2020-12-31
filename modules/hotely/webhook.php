@@ -19,4 +19,6 @@ class hotelyModulController
 
 }
 
-hotelyModulController::run();
+$modul = new hotelyModulController();
+$modul->run();
+
