@@ -4,6 +4,7 @@ use DntLibrary\Base\Dnt;
 use DntLibrary\Base\Frontend;
 use DntLibrary\Base\Image;
 use DntLibrary\Base\Vendor;
+
 $frontend = new Frontend();
 $vendor = new Vendor();
 $dnt = new Dnt();
@@ -11,18 +12,18 @@ $image = new Image();
 
 $data = $frontend->get();
 $layout = $vendor->getLayout();
-include "dnt-view/layouts/".$layout."/tpl_functions.php";
-include "dnt-view/layouts/".$layout."/top.php"; 
+include 'dnt-view/layouts/' . $layout . '/tpl_functions.php';
+include 'dnt-view/layouts/' . $layout . '/top.php';
 ?>
 <!-- End Header -->
-<?php get_slider_main_db($data, 303, "mainslider"); ?>
+<?php get_slider_main_db($data, 303, 'mainslider'); ?>
 <?php
 /* get_slider($data, 303); */
 
 $RAW_DATA = $data['meta_tree']['keys'];
 $HOTELY = array();
 foreach ($RAW_DATA as $key => $item) {
-    if ($dnt->in_string("hotel_name", $key)) {
+    if ($dnt->in_string('hotel_name', $key)) {
         $HOTELY[] = $item['show'];
     }
 }
@@ -44,15 +45,15 @@ $COUNT_HOTEL = count($HOTELY);
                                     <div class="row">
                                         <div class="col-md-5 row miniy-gallery">
                                             <?php
-                                            $GALLERY = explode(",", $data['meta_tree']['keys']['id_' . $i . '_image_1']['value']);
+                                            $GALLERY = explode(',', $data['meta_tree']['keys']['id_' . $i . '_image_1']['value']);
                                             $PHOTOS = array();
 
                                             $j = 1;
                                             foreach ($GALLERY as $item) {
                                                 if ($j == 1) {
-                                                    $class = "first";
+                                                    $class = 'first';
                                                 } else {
-                                                    $class = "other";
+                                                    $class = 'other';
                                                 }
                                                 $img = $image->getFileImage($item);
                                                 echo '<a class="example-image-link" href="' . $img . '" data-lightbox="gallery-' . $i . '">';
@@ -133,4 +134,4 @@ $COUNT_HOTEL = count($HOTELY);
     </div>
 </div>
 <?php get_footer($data); ?>
-<?php include "dnt-view/layouts/" . $layout . "/bottom.php"; ?>
+<?php include 'dnt-view/layouts/' . $layout . '/bottom.php'; ?>

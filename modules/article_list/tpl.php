@@ -10,23 +10,22 @@ use DntLibrary\Base\Rest;
 use DntLibrary\Base\Vendor;
 use DntLibrary\Base\Webhook;
 
-
 $frontend = new Frontend();
 $vendor = new Vendor();
 $dnt = new Dnt();
 $image = new Image();
 $articleList = new ArticleList();
 
-include "dnt-view/layouts/" . $vendor->getLayout() . "/tpl_functions.php";
+include 'dnt-view/layouts/' . $vendor->getLayout() . '/tpl_functions.php';
 $data = $frontend->get();
 //$data = false;
 get_top($data);
-include "dnt-view/layouts/" . $vendor->getLayout() . "/top.php";
+include 'dnt-view/layouts/' . $vendor->getLayout() . '/top.php';
 
-$rest = new Rest;
-$db = new DB;
-$articleView = new ArticleView;
-$webhook = new Webhook;
+$rest = new Rest();
+$db = new DB();
+$articleView = new ArticleView();
+$webhook = new Webhook();
 ?>
 <div class="margin-bottom-60"></div>
 <div class="container panel panel-primary dnt-poll">
@@ -42,9 +41,8 @@ $webhook = new Webhook;
                     $contentMeta = false;
                     $query = $articleList->query();
                     if ($db->num_rows($query) > 0) {
-
                         foreach ($db->get_results($query) as $row) {
-                            $img = $image->getPostImage($row['id'], "dnt_posts");
+                            $img = $image->getPostImage($row['id'], 'dnt_posts');
                             $content = $row['content'];
                             $perex = $row['perex'];
                             $name = $row['name'];
@@ -52,19 +50,19 @@ $webhook = new Webhook;
 
                             $metaArr = $articleView->getPostsMeta($row['id'], $row['service']);
                             foreach ($metaArr as $meta) {
-                                if ($meta['content_type'] == "image") {
+                                if ($meta['content_type'] == 'image') {
                                     $imgMeta = $image->getFileImage($meta['value']);
                                     break;
                                 }
                             }
                             foreach ($metaArr as $meta) {
-                                if ($meta['content_type'] == "text") {
+                                if ($meta['content_type'] == 'text') {
                                     $nameMeta = $meta['value'];
                                     break;
                                 }
                             }
                             foreach ($metaArr as $meta) {
-                                if ($meta['content_type'] == "content") {
+                                if ($meta['content_type'] == 'content') {
                                     $contentMeta = $meta['value'];
                                     break;
                                 }
@@ -75,13 +73,13 @@ $webhook = new Webhook;
                                 $url = WWW_PATH . $modul[0];
                             }
 
-                            if ($dnt->not_html($content) == "") {
+                            if ($dnt->not_html($content) == '') {
                                 $content = $contentMeta;
                             }
-                            if ($img == "") {
+                            if ($img == '') {
                                 $img = $imgMeta;
                             }
-                            if ($dnt->not_html($name) == "") {
+                            if ($dnt->not_html($name) == '') {
                                 $name = $nameMeta;
                             }
                             ?>

@@ -12,11 +12,11 @@ $image = new Image();
 
 $data = $frontend->get();
 $layout = $vendor->getLayout();
-include "dnt-view/layouts/" . $layout . "/tpl_functions.php";
-include "dnt-view/layouts/" . $layout . "/top.php";
+include 'dnt-view/layouts/' . $layout . '/tpl_functions.php';
+include 'dnt-view/layouts/' . $layout . '/top.php';
 ?>
 
-<?php get_slider_main_db($data, 303, "mainslider"); ?>
+<?php get_slider_main_db($data, 303, 'mainslider'); ?>
 <?php /* get_slider($data, 303); */ ?>
 
 <!-- End Header -->
@@ -55,7 +55,7 @@ $map_zoom = $mapLocation[2];
 
 </style>
 <?php
-$GALLERY = explode(",", $data['meta_tree']['keys']['galeria_1']['value']);
+$GALLERY = explode(',', $data['meta_tree']['keys']['galeria_1']['value']);
 $PHOTOS = array();
 foreach ($GALLERY as $item) {
     $PHOTOS[] = $image->getFileImage($item);
@@ -76,7 +76,7 @@ foreach ($GALLERY as $item) {
                                 <?php
                                 $ids = $data['meta_tree']['keys']['galeria_1']['value'];
                                 $text = false;
-                                get_slider_carousel($data, "ids", $ids, "region-carousel", $text);
+                                get_slider_carousel($data, 'ids', $ids, 'region-carousel', $text);
                                 ?>
                                 <?php echo $data['meta_tree']['keys']['text_1']['value'] ?>
                             </div>
@@ -85,7 +85,7 @@ foreach ($GALLERY as $item) {
                     <?php /* <h3 class="text-left">Video</h3> */ ?>
                     <div class="row">
                         <div class="col-xs-12 col-md-12 item">
-                            <?php if ($data['meta_tree']['keys']['youtube_embed']['show'] == 1) { ?> 	
+                            <?php if ($data['meta_tree']['keys']['youtube_embed']['show'] == 1) { ?>    
                                 <div class="video_cont">
                                     <div class="video_div">
                                         <div class="responsive-container">
@@ -103,45 +103,45 @@ foreach ($GALLERY as $item) {
                         </div>
                     </div>
                     <div class="row service-boxes margin-top-20 margin-bottom-20">
-                        <?php if ($frontend->getMetaTree($data, "adresa")) { ?>
+                        <?php if ($frontend->getMetaTree($data, 'adresa')) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-location-arrow wow bounceIn" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceIn;"></i>
                                       <h3></h3> */ ?>
-                                    <p class="text-muted"><?php echo $frontend->getMetaTree($data, "adresa"); ?></p>
+                                    <p class="text-muted"><?php echo $frontend->getMetaTree($data, 'adresa'); ?></p>
                                 </div>
                             </div>
                         <?php } ?>
-                        <?php if ($frontend->getMetaTree($data, "email")) { ?>
+                        <?php if ($frontend->getMetaTree($data, 'email')) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-heart wow bounceIn" style="visibility: visible; animation-name: bounceIn;"></i><h3></h3> */ ?>
                                     <p class="text-muted">
-                                        <a href="mailto:<?php echo $frontend->getMetaTree($data, "email"); ?>">
-                                            <?php echo $frontend->getMetaTree($data, "email"); ?>
+                                        <a href="mailto:<?php echo $frontend->getMetaTree($data, 'email'); ?>">
+                                            <?php echo $frontend->getMetaTree($data, 'email'); ?>
                                         </a>
                                     </p>
                                 </div>
                             </div>
                         <?php } ?>
-                        <?php if ($frontend->getMetaTree($data, "tel_c")) { ?>
+                        <?php if ($frontend->getMetaTree($data, 'tel_c')) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-paper-plane-o wow bounceIn" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
                                       <h3></h3> */ ?>
                                     <p class="text-muted">
-                                        <?php echo $frontend->getMetaTree($data, "tel_c"); ?>
+                                        <?php echo $frontend->getMetaTree($data, 'tel_c'); ?>
                                     </p>
                                 </div>
                             </div>
                         <?php } ?>
-                        <?php if ($frontend->getMetaTree($data, "web")) { ?>
+                        <?php if ($frontend->getMetaTree($data, 'web')) { ?>
                             <div class="col-lg-3 col-md-6 text-center">
                                 <div class="service-box">
                                     <?php /* <i class="fa fa-2x fa-globe wow bounceIn" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceIn;"></i>
                                       <h3></h3> */ ?>
-                                    <p class="text-muted"><a target="_blank" href="<?php echo $frontend->getMetaTree($data, "web"); ?>">
-                                            <?php echo $dnt->linkFormat($frontend->getMetaTree($data, "web")); ?>
+                                    <p class="text-muted"><a target="_blank" href="<?php echo $frontend->getMetaTree($data, 'web'); ?>">
+                                            <?php echo $dnt->linkFormat($frontend->getMetaTree($data, 'web')); ?>
                                         </a></p>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@ foreach ($GALLERY as $item) {
     </div>
 </div>
 <?php
-$GALLERY = explode(",", $data['meta_tree']['keys']['galeria_1']['value']);
+$GALLERY = explode(',', $data['meta_tree']['keys']['galeria_1']['value']);
 $pocet = count($GALLERY);
 $index = rand(0, $pocet - 1);
 $PHOTOS = array();
@@ -177,4 +177,4 @@ if ($pocet > 0) {
 }
 ?>
 <?php get_footer($data); ?>
-<?php include "dnt-view/layouts/" . $layout . "/bottom.php"; ?>		
+<?php include 'dnt-view/layouts/' . $layout . '/bottom.php'; ?>     

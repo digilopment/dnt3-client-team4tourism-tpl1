@@ -6,52 +6,64 @@ use DntLibrary\Base\Webhook;
 function custom_modules($webhook = false)
 {
     if (!$webhook) {
-        $webhook = new Webhook;
+        $webhook = new Webhook();
     }
     /*
       custom modul listeners
      */
     $custom_modules = array(
         //PARTNERI
-        "intro" => array_merge(
-                array(), $webhook->getSitemapModules("intro")
+        'intro' => array_merge(
+            array(),
+            $webhook->getSitemapModules('intro')
         ),
-        "region" => array_merge(
-                array(), $webhook->getSitemapModules("region")
+        'region' => array_merge(
+            array(),
+            $webhook->getSitemapModules('region')
         ),
-        "hotely" => array_merge(
-                array(), $webhook->getSitemapModules("hotely")
+        'hotely' => array_merge(
+            array(),
+            $webhook->getSitemapModules('hotely')
         ),
-        "partneri" => array_merge(
-                array(), $webhook->getSitemapModules("partneri")
+        'partneri' => array_merge(
+            array(),
+            $webhook->getSitemapModules('partneri')
         ),
-        "registracia" => array_merge(
-                array(), $webhook->getSitemapModules("registracia")
+        'registracia' => array_merge(
+            array(),
+            $webhook->getSitemapModules('registracia')
         ),
-        "singl_page" => array_merge(
-                array(), $webhook->getSitemapModules("singl_page")
+        'singl_page' => array_merge(
+            array(),
+            $webhook->getSitemapModules('singl_page')
         ),
-        "search" => array_merge(
-                array(), $webhook->getSitemapModules("search")
+        'search' => array_merge(
+            array(),
+            $webhook->getSitemapModules('search')
         ),
-        "clean" => array_merge(
-                array(), $webhook->getSitemapModules("clean")
+        'clean' => array_merge(
+            array(),
+            $webhook->getSitemapModules('clean')
         ),
         //DETAIL
-        "article_view" => array_merge(
-                array(), array("{alphabet}/detail/{digit}/{alphabet}")
+        'article_view' => array_merge(
+            array(),
+            array('{alphabet}/detail/{digit}/{alphabet}')
         ),
         //AUTOREDIRECT
-        "auto_redirect" => array_merge(
-                array(), array("a/{digit}")
+        'auto_redirect' => array_merge(
+            array(),
+            array('a/{digit}')
         ),
         //VIDEO EMBED
-        "video_embed" => array_merge(
-                array(), array("embed/video/{digit}")
+        'video_embed' => array_merge(
+            array(),
+            array('embed/video/{digit}')
         ),
         //RPC
-        "rpc" => array_merge(
-                array(), array("rpc/json/{eny}/{eny}")
+        'rpc' => array_merge(
+            array(),
+            array('rpc/json/{eny}/{eny}')
         ),
             /* "homepage" => array_merge(
               array(), $webhook->getSitemapModules("homepage")
@@ -70,37 +82,37 @@ function custom_modules($webhook = false)
 function modulesConfig()
 {
     return array(
-        "intro" => array(
-            "service_name" => "Intro",
-            "sql" => ""
+        'intro' => array(
+            'service_name' => 'Intro',
+            'sql' => '',
         ),
-        "hotely" => array(
-            "service_name" => "Hotely",
-            "sql" => ""
+        'hotely' => array(
+            'service_name' => 'Hotely',
+            'sql' => '',
         ),
-        "region" => array(
-            "service_name" => "Región",
-            "sql" => ""
+        'region' => array(
+            'service_name' => 'Región',
+            'sql' => '',
         ),
-        "partneri" => array(
-            "service_name" => "Partneri",
-            "sql" => ""
+        'partneri' => array(
+            'service_name' => 'Partneri',
+            'sql' => '',
         ),
-        "registracia" => array(
-            "service_name" => "Registrácia",
-            "sql" => ""
+        'registracia' => array(
+            'service_name' => 'Registrácia',
+            'sql' => '',
         ),
-        "singl_page" => array(
-            "service_name" => "Singl Page",
-            "sql" => ""
+        'singl_page' => array(
+            'service_name' => 'Singl Page',
+            'sql' => '',
         ),
-        "search" => array(
-            "service_name" => "Vyhľadávanie",
-            "sql" => ""
+        'search' => array(
+            'service_name' => 'Vyhľadávanie',
+            'sql' => '',
         ),
-        "clean" => array(
-            "service_name" => "Clean Page",
-            "sql" => ""
+        'clean' => array(
+            'service_name' => 'Clean Page',
+            'sql' => '',
         ),
             /* "homepage" => array(
               "service_name" => "Homepage",
@@ -119,99 +131,97 @@ function modulesConfig()
 
 function websettings()
 {
-	$vendor = new Vendor();
+    $vendor = new Vendor();
     $insertedData[] = array(
-        '`type`' => "social_wall",
-        '`key`' => "facebook_page_sw",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Facebook Page Social Wall",
+        '`type`' => 'social_wall',
+        '`key`' => 'facebook_page_sw',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Facebook Page Social Wall',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "social_wall",
-        '`key`' => "facebook_post_sw",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Facebook Post Social Wall",
+        '`type`' => 'social_wall',
+        '`key`' => 'facebook_post_sw',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Facebook Post Social Wall',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "social_wall",
-        '`key`' => "instagram_sw",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Instagram Post Social Wall",
+        '`type`' => 'social_wall',
+        '`key`' => 'instagram_sw',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Instagram Post Social Wall',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "social_wall",
-        '`key`' => "youtube_sw",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Youtube Social Wall",
+        '`type`' => 'social_wall',
+        '`key`' => 'youtube_sw',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Youtube Social Wall',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "social_wall",
-        '`key`' => "twitter_sw",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Twitter Social Wall",
+        '`type`' => 'social_wall',
+        '`key`' => 'twitter_sw',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Twitter Social Wall',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "keys",
-        '`key`' => "send_grid_api_key",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Api key pre Send grid",
+        '`type`' => 'keys',
+        '`key`' => 'send_grid_api_key',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Api key pre Send grid',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "keys",
-        '`key`' => "send_grid_api_template_id",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Template ID pre Send grid",
+        '`type`' => 'keys',
+        '`key`' => 'send_grid_api_template_id',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Template ID pre Send grid',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "keys",
-        '`key`' => "automatic_voucher",
-        '`value`' => "",
-        '`content_type`' => "text",
-        '`description`' => "Automatické odosielanie voucherov",
+        '`type`' => 'keys',
+        '`key`' => 'automatic_voucher',
+        '`value`' => '',
+        '`content_type`' => 'text',
+        '`description`' => 'Automatické odosielanie voucherov',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '10',
     );
     $insertedData[] = array(
-        '`type`' => "default",
-        '`key`' => "hide_registration_info",
-        '`value`' => "",
-        '`content_type`' => "bool",
-        '`description`' => "Skryť informácie a preklik na registráciu v pravom stĺpci",
+        '`type`' => 'default',
+        '`key`' => 'hide_registration_info',
+        '`value`' => '',
+        '`content_type`' => 'bool',
+        '`description`' => 'Skryť informácie a preklik na registráciu v pravom stĺpci',
         '`vendor_id`' => $vendor->getId(),
         '`show`' => '0',
         '`order`' => '70',
     );
-
-
 
     return $insertedData;
 }

@@ -7,8 +7,8 @@ $frontend = new Frontend();
 $vendor = new Vendor();
 $data = $frontend->get();
 $layout = $vendor->getLayout();
-include "dnt-view/layouts/" . $layout . "/tpl_functions.php";
-include "dnt-view/layouts/" . $layout . "/top.php";
+include 'dnt-view/layouts/' . $layout . '/tpl_functions.php';
+include 'dnt-view/layouts/' . $layout . '/top.php';
 ?>
 <!-- End Header -->
 <style>
@@ -34,7 +34,7 @@ include "dnt-view/layouts/" . $layout . "/top.php";
     } else {
         $text = false;
     }
-    get_slider_carousel($data, "ids", $ids, "carousel1", $text);
+    get_slider_carousel($data, 'ids', $ids, 'carousel1', $text);
     ?>
 </div>
 <div class="margin-bottom-60"></div>
@@ -52,9 +52,9 @@ include "dnt-view/layouts/" . $layout . "/top.php";
                 <?php if ($data['meta_tree']['keys']['intro_image']['show'] == 1) { ?>
                     <?php
                     $ids = $data['meta_tree']['keys']['intro_image']['value'];
-                    get_slider_carousel($data, "ids", $ids, "carousel2", false);
+                    get_slider_carousel($data, 'ids', $ids, 'carousel2', false);
                     ?>
-<?php } ?>
+                <?php } ?>
             </div>
         </div>
         <!-- Right Sidebar -->
@@ -65,4 +65,4 @@ include "dnt-view/layouts/" . $layout . "/top.php";
     </div>
 </div>
 <?php get_footer($data); ?>
-<?php include "dnt-view/layouts/" . $layout . "/bottom.php"; ?>
+<?php include 'dnt-view/layouts/' . $layout . '/bottom.php'; ?>

@@ -17,10 +17,10 @@ $rest = new Rest();
 
 $data = $frontend->get();
 $layout = $vendor->getLayout();
-   include "dnt-view/layouts/".$layout."/tpl_functions.php";
-   include "dnt-view/layouts/".$layout."/top.php"; 
-   ?>
-<style>	
+   include 'dnt-view/layouts/' . $layout . '/tpl_functions.php';
+   include 'dnt-view/layouts/' . $layout . '/top.php';
+?>
+<style> 
    .dnt-form .row,
    .dnt-form .col-xs-12,
    .dnt-form .col-md-4,
@@ -50,17 +50,17 @@ $layout = $vendor->getLayout();
    }
 </style>
 <!-- End Header -->
-<?php get_slider_main_db($data, 303, "mainslider");?>
-<?php /*get_slider($data, 303);*/ 
+<?php get_slider_main_db($data, 303, 'mainslider');?>
+<?php /*get_slider($data, 303);*/
    $FORM_BASE_VALUE = array();
-   foreach(array_keys($data['meta_tree']['keys']) as $key){
-   	if($dnt->in_string("form_base", $key)){
-   		if($data['meta_tree']['keys'][$key]['show'] == 1){
-   			$FORM_BASE_VALUE[$key] = $data['meta_tree']['keys'][$key];
-   		}
-   	}
-   }
-   ?>
+foreach (array_keys($data['meta_tree']['keys']) as $key) {
+    if ($dnt->in_string('form_base', $key)) {
+        if ($data['meta_tree']['keys'][$key]['show'] == 1) {
+            $FORM_BASE_VALUE[$key] = $data['meta_tree']['keys'][$key];
+        }
+    }
+}
+?>
 <div class="container margin-bottom-40">
    <div class="row">
       <!-- Main Content -->
@@ -77,18 +77,18 @@ $layout = $vendor->getLayout();
 
                     $("#registration_form").validate({
                         rules: {
-                            <?php foreach($FORM_BASE_VALUE as $key => $form){
-                                  if($key != "form_base_tel_c"){
-                                  ?>
-                            <?php echo $key; ?>: {
+                            <?php foreach ($FORM_BASE_VALUE as $key => $form) {
+                                if ($key != 'form_base_tel_c') {
+                                    ?>
+                                    <?php echo $key; ?>: {
                                 required: true,
                                 minlength: 1
                             },
-                            <?php 
-                                  } 
-                                  } 
-                                  ?>
-                            <?php if($data['meta_tree']['keys']['form_user_image_1']['show'] == 1){ ?>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <?php if ($data['meta_tree']['keys']['form_user_image_1']['show'] == 1) { ?>
                             form_user_image_1: {
                                 required: true,
                                 accept: "jpg,png,jpeg,gif"
@@ -98,33 +98,31 @@ $layout = $vendor->getLayout();
                                 required: true,
                                 minlength: 1
                             },
-                            <?php if(
-                                  $data['meta_tree']['keys']['form_extend_v1_doklad']['show'] == 1 || 
-                                  $data['meta_tree']['keys']['form_extend_v2_otazka']['show'] == 1 || 
-                                  $data['meta_tree']['keys']['form_extend_v3_otazka']['show'] == 1 ){ ?>
+                            <?php if ($data['meta_tree']['keys']['form_extend_v1_doklad']['show'] == 1 ||
+                                  $data['meta_tree']['keys']['form_extend_v2_otazka']['show'] == 1 ||
+                                  $data['meta_tree']['keys']['form_extend_v3_otazka']['show'] == 1) { ?>
                             ans: {
                                 required: true,
                                 minlength: 1
                             },
-                            <?php 
-                                  } 
-                                  ?>
+                            <?php
+                            }
+                            ?>
                         },
                         messages: {
-                            <?php foreach($FORM_BASE_VALUE as $key => $form){
-                                  if($key != "form_base_tel_c"){ ?>
-                            <?php echo $key; ?>: "<?php echo $multiLanguage->translate($data, "field_word_err", "translate");?> ^",
+                            <?php foreach ($FORM_BASE_VALUE as $key => $form) {
+                                if ($key != 'form_base_tel_c') { ?>
+                                    <?php echo $key; ?>: "<?php echo $multiLanguage->translate($data, 'field_word_err', 'translate');?> ^",
+                                <?php } ?>
                             <?php } ?>
+                            podmienky: "<?php echo $multiLanguage->translate($data, 'field_word_err', 'translate');?> ^",
+                            <?php if ($data['meta_tree']['keys']['form_extend_v1_doklad']['show'] == 1 ||
+                                  $data['meta_tree']['keys']['form_extend_v2_otazka']['show'] == 1 ||
+                                  $data['meta_tree']['keys']['form_extend_v3_otazka']['show'] == 1
+                                  ) {?>
+                            ans: "<?php echo $multiLanguage->translate($data, 'field_word_err', 'translate');?> ^",
                             <?php } ?>
-                            podmienky: "<?php echo $multiLanguage->translate($data, "field_word_err", "translate");?> ^",
-                            <?php if(
-                                  $data['meta_tree']['keys']['form_extend_v1_doklad']['show'] == 1 || 
-                                  $data['meta_tree']['keys']['form_extend_v2_otazka']['show'] == 1 || 
-                                  $data['meta_tree']['keys']['form_extend_v3_otazka']['show'] == 1 
-                                  ){?>
-                            ans: "<?php echo $multiLanguage->translate($data, "field_word_err", "translate");?> ^",
-                            <?php } ?>
-                            <?php if($data['meta_tree']['keys']['form_user_image_1']['show'] == 1){ ?>
+                            <?php if ($data['meta_tree']['keys']['form_user_image_1']['show'] == 1) { ?>
                             form_user_image_1: "Prosím vyberte fotku na upload. Fotka musí byť vo formáte jpg, jpeg, png, alebo gif",
                             <?php } ?>
                         },
@@ -132,11 +130,11 @@ $layout = $vendor->getLayout();
 
                             $.ajax({
                                 // Your server script to process the upload
-								<?php if($multiLanguage->getLang() == "0"){ ?>
+                                <?php if ($multiLanguage->getLang() == '0') { ?>
                                 url: "<?php echo WWW_PATH; ?>rpc/json/competition-register/<?php echo $data['post_id']?>",
-								<?php }else{?>
-								url: "<?php echo WWW_PATH.$multiLanguage->getLang(); ?>/rpc/json/competition-register/<?php echo $data['post_id']?>",
-								<?php } ?>
+                                <?php } else {?>
+                                url: "<?php echo WWW_PATH . $multiLanguage->getLang(); ?>/rpc/json/competition-register/<?php echo $data['post_id']?>",
+                                <?php } ?>
                                 type: 'POST',
 
                                 // Form data
@@ -185,20 +183,20 @@ $layout = $vendor->getLayout();
                         }
                     });
 
-                    //writeError("TEST");		
+                    //writeError("TEST");       
                     function writeError(message) {
                         $("#form-result").html("<div class=\"alert alert-error\">" + message + "</div>");
                     }
                 });
             </script> 
-			<?php if($vendor->getColumn("in_progress") == 1){?>
+            <?php if ($vendor->getColumn('in_progress') == 1) {?>
             <div class="containers">
                <div class="row">
                   <div class="col-md-12">
                      <div class="containers">
                         <form class="dnt-form" id="registration_form" action="#" method="POST">
                            <!-- base form -->
-                           <?php foreach($FORM_BASE_VALUE as $key => $form){ ?>
+                           <?php foreach ($FORM_BASE_VALUE as $key => $form) { ?>
                            <div class="row">
                               <div class="col-xs-12 col-md-5 description">
                                  <label for="<?php echo $key; ?>"><?php echo $form['value']; ?><span class="povinne">*</span></label>
@@ -209,7 +207,7 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- IMG -->
-                           <?php if($data['meta_tree']['keys']['form_user_image_1']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_user_image_1']['show'] == 1) { ?>
                            <div class="row">
                               <div class="col-xs-12 col-md-5 description">
                                  <label><?php echo $data['meta_tree']['keys']['form_user_image_1']['value']; ?><span class="povinne">*</span></label>
@@ -219,8 +217,8 @@ $layout = $vendor->getLayout();
                               </div>
                            </div>
                            <?php } ?>   
-                           <!-- extends 1 form doklad -->	
-                           <?php if($data['meta_tree']['keys']['form_extend_v1_doklad']['show'] == 1){ ?>
+                           <!-- extends 1 form doklad -->   
+                           <?php if ($data['meta_tree']['keys']['form_extend_v1_doklad']['show'] == 1) { ?>
                            <div class="row">
                               <div class="col-xs-12 col-md-5 description">
                                  <label><?php echo $data['meta_tree']['keys']['form_extend_v1_doklad']['value']; ?><span class="povinne">*</span></label>
@@ -230,8 +228,8 @@ $layout = $vendor->getLayout();
                               </div>
                            </div>
                            <?php } ?>    
-                           <!-- extends 2 form condisions -->	
-                           <?php if($data['meta_tree']['keys']['form_extend_v2_otazka']['show'] == 1){ ?>
+                           <!-- extends 2 form condisions -->   
+                           <?php if ($data['meta_tree']['keys']['form_extend_v2_otazka']['show'] == 1) { ?>
                            <div class="row">
                               <div class="col-xs-12 col-md-5 description">
                                  <label><?php echo $data['meta_tree']['keys']['form_extend_v2_otazka']['value']; ?><span class="povinne">*</span></label>
@@ -242,27 +240,27 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>    
                            <!-- extends 3 form condisions -->
-                           <?php if($data['meta_tree']['keys']['form_extend_v3_otazka']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_extend_v3_otazka']['show'] == 1) { ?>
                            <div class="row questions">
                               <div class="col-xs-12 col-md-5 description">
                                  <label for="lname"><?php echo $data['meta_tree']['keys']['form_extend_v3_otazka']['value']; ?><span class="povinne">*</span></label>
                               </div>
                               <div class="col-xs-12 col-md-7">
-                                 <?php  if($data['meta_tree']['keys']['form_extend_v3_odpoved_a']['show'] == 1){ ?>
+                                 <?php  if ($data['meta_tree']['keys']['form_extend_v3_odpoved_a']['show'] == 1) { ?>
                                  <label class="row" for="ans_a">
                                     <div class="col-xs-1 dnt-form-item">a)</div>
                                     <div class="col-xs-1 dnt-form-item"><input type="radio" name="ans" value="a" class="dnt-radio" id="ans_a"></div>
                                     <div class="col-xs-10 dnt-form-item"><?php echo $data['meta_tree']['keys']['form_extend_v3_odpoved_a']['value']; ?></div>
                                  </label>
                                  <?php } ?>
-                                 <?php  if($data['meta_tree']['keys']['form_extend_v3_odpoved_b']['show'] == 1){ ?>
+                                 <?php  if ($data['meta_tree']['keys']['form_extend_v3_odpoved_b']['show'] == 1) { ?>
                                  <label class="row" for="ans_b">
                                     <div class="col-xs-1 dnt-form-item">b)</div>
                                     <div class="col-xs-1 dnt-form-item"><input type="radio" name="ans" value="b" class="dnt-radio" id="ans_b"></div>
                                     <div class="col-xs-10 dnt-form-item"><?php echo $data['meta_tree']['keys']['form_extend_v3_odpoved_b']['value']; ?></div>
                                  </label>
                                  <?php } ?>
-                                 <?php  if($data['meta_tree']['keys']['form_extend_v3_odpoved_c']['show'] == 1){ ?>
+                                 <?php  if ($data['meta_tree']['keys']['form_extend_v3_odpoved_c']['show'] == 1) { ?>
                                  <label class="row" for="ans_c">
                                     <div class="col-xs-1 dnt-form-item">c)</div>
                                     <div class="col-xs-1 dnt-form-item"><input type="radio" name="ans" value="c" class="dnt-radio" id="ans_c"></div>
@@ -273,11 +271,11 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- podmienky sutaze -->
-                           <?php if($data['meta_tree']['keys']['form_file_podmienky_1']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_file_podmienky_1']['show'] == 1) { ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
                                  <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_podmienky_1']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_podmienkami_1", "translate");?>
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, 'suhlas_s_podmienkami_1', 'translate');?>
                                  </a><span class="povinne">*</span>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
@@ -286,11 +284,11 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- pdf newsletter 1  -->
-                           <?php if($data['meta_tree']['keys']['form_file_newsletter_1']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_file_newsletter_1']['show'] == 1) { ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
                                  <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_newsletter_1']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_newslettrom_1", "translate");?>
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, 'suhlas_s_newslettrom_1', 'translate');?>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
                                  <input type="checkbox" name="newsletter_1" >
@@ -298,11 +296,11 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- pdf newsletter 2  -->
-                           <?php if($data['meta_tree']['keys']['form_file_newsletter_2']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_file_newsletter_2']['show'] == 1) { ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
                                  <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_newsletter_2']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_newslettrom_2", "translate");?>
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, 'suhlas_s_newslettrom_2', 'translate');?>
                                  </a>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
@@ -311,11 +309,11 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- pdf newsletter 3  -->
-                           <?php if($data['meta_tree']['keys']['form_file_newsletter_3']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_file_newsletter_3']['show'] == 1) { ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
                                  <a target="_blank" href="<?php echo $image->getFileImage($data['meta_tree']['keys']['form_file_newsletter_3']['value']); ?>">
-                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "suhlas_s_newslettrom_3", "translate");?>
+                                 <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, 'suhlas_s_newslettrom_3', 'translate');?>
                                  </a>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
@@ -324,16 +322,16 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- embed newsletter 1  -->
-                           <?php if($data['meta_tree']['keys']['form_embed_newsletter_1']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_embed_newsletter_1']['show'] == 1) { ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
-								 <?php if(empty($data['meta_tree']['keys']['form_embed_newsletter_1']['value'])){ ?>
-									<?php echo $multiLanguage->translate($data, "text_newsletter_embed_1", "translate");?>
-								  <?php }else{ ?>
-									 <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_1']['value']; ?>">
-									<i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "text_newsletter_embed_1", "translate");?>
-									</a>
-								  <?php }?>
+                                 <?php if (empty($data['meta_tree']['keys']['form_embed_newsletter_1']['value'])) { ?>
+                                        <?php echo $multiLanguage->translate($data, 'text_newsletter_embed_1', 'translate');?>
+                                 <?php } else { ?>
+                                     <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_1']['value']; ?>">
+                                    <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, 'text_newsletter_embed_1', 'translate');?>
+                                    </a>
+                                 <?php }?>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
                                  <input type="checkbox" name="newsletter_embed_1" >
@@ -341,16 +339,16 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- embed newsletter 2  -->
-                           <?php if($data['meta_tree']['keys']['form_embed_newsletter_2']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_embed_newsletter_2']['show'] == 1) { ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
-                                 <?php if(empty($data['meta_tree']['keys']['form_embed_newsletter_2']['value'])){ ?>
-									<?php echo $multiLanguage->translate($data, "text_newsletter_embed_2", "translate");?>
-								  <?php }else{ ?>
-									 <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_2']['value']; ?>">
-									<i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "text_newsletter_embed_2", "translate");?>
-									</a>
-								  <?php }?>
+                                 <?php if (empty($data['meta_tree']['keys']['form_embed_newsletter_2']['value'])) { ?>
+                                        <?php echo $multiLanguage->translate($data, 'text_newsletter_embed_2', 'translate');?>
+                                 <?php } else { ?>
+                                     <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_2']['value']; ?>">
+                                    <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, 'text_newsletter_embed_2', 'translate');?>
+                                    </a>
+                                 <?php }?>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
                                  <input type="checkbox" name="newsletter_embed_2" >
@@ -358,66 +356,66 @@ $layout = $vendor->getLayout();
                            </div>
                            <?php } ?>
                            <!-- embed newsletter 3  -->
-                           <?php if($data['meta_tree']['keys']['form_embed_newsletter_3']['show'] == 1){ ?>
+                           <?php if ($data['meta_tree']['keys']['form_embed_newsletter_3']['show'] == 1) { ?>
                            <div class="row checkbox-line">
                               <div class="col-xs-12 col-md-11">
-                                <?php if(empty($data['meta_tree']['keys']['form_embed_newsletter_3']['value'])){ ?>
-									<?php echo $multiLanguage->translate($data, "text_newsletter_embed_3", "translate");?>
-								  <?php }else{ ?>
-									 <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_3']['value']; ?>">
-									<i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, "text_newsletter_embed_3", "translate");?>
-									</a>
-								  <?php }?>
+                                <?php if (empty($data['meta_tree']['keys']['form_embed_newsletter_3']['value'])) { ?>
+                                    <?php echo $multiLanguage->translate($data, 'text_newsletter_embed_3', 'translate');?>
+                                <?php } else { ?>
+                                     <a target="_blank" href="<?php echo $data['meta_tree']['keys']['form_embed_newsletter_3']['value']; ?>">
+                                    <i class="fa fa-external-link"></i> <?php echo $multiLanguage->translate($data, 'text_newsletter_embed_3', 'translate');?>
+                                    </a>
+                                <?php }?>
                               </div>
                               <div class="col-xs-12 col-md-1 text-right">
                                  <input type="checkbox" name="newsletter_embed_3" >
                               </div>
                            </div>
                            <?php } ?>
-                           <?php 
-                              if($data['meta_settings']['keys']['gc_site_key']['show'] == 1 && $data['meta_settings']['keys']['gc_secret_key']['show'] == 1){ 
-                                $siteKey 	= $data['meta_settings']['keys']['gc_site_key']['value']; 
-                                $secretKey 	= $data['meta_settings']['keys']['gc_secret_key']['value'];
+                           <?php
+                            if ($data['meta_settings']['keys']['gc_site_key']['show'] == 1 && $data['meta_settings']['keys']['gc_secret_key']['show'] == 1) {
+                                $siteKey = $data['meta_settings']['keys']['gc_site_key']['value'];
+                                $secretKey = $data['meta_settings']['keys']['gc_secret_key']['value'];
                                 $gc = new GoogleCaptcha($siteKey, $secretKey);
-                                $captcha = '<div class="g-recaptcha" data-sitekey="'.$gc->publicToken.'"></div>';
-                              ?>
+                                $captcha = '<div class="g-recaptcha" data-sitekey="' . $gc->publicToken . '"></div>';
+                                ?>
                            <div class="row captcha">
                               <div class="col-xs-12 col-md-5">
-                                 <label><?php echo $multiLanguage->translate($data, "captcha", "translate");?><span class="povinne">*</span></label>
+                                 <label><?php echo $multiLanguage->translate($data, 'captcha', 'translate');?><span class="povinne">*</span></label>
                               </div>
                               <div class="col-xs-12 col-md-7">
-                                 <?php echo $captcha; ?>
+                                <?php echo $captcha; ?>
                               </div>
                            </div>
-						    <div class="row captcha">
+                            <div class="row captcha">
                               <div class="col-xs-12 col-md-5">
                               </div>
                               <div class="col-xs-12 col-md-7">
-									<br/>
-                                 <label><span class="povinne">* </span><?php echo $multiLanguage->translate($data, "field_word_err", "translate");?></label>
+                                    <br/>
+                                 <label><span class="povinne">* </span><?php echo $multiLanguage->translate($data, 'field_word_err', 'translate');?></label>
                               </div>
                            </div>
-                           <?php } ?>
+                            <?php } ?>
                            <div class="row">
                               <div class="col-xs-12 col-md-5">
                               </div>
                               <div class="col-xs-12 col-md-7">
-                                 <input class="btn btn-u btn-lg " type="submit" name="sent" value="<?php echo $multiLanguage->translate($data, "odoslat_btn", "translate");?>">
+                                 <input class="btn btn-u btn-lg " type="submit" name="sent" value="<?php echo $multiLanguage->translate($data, 'odoslat_btn', 'translate');?>">
                               </div>
                            </div>
                         </form>
                         <div id="form_ok" style="display: none">
                            <div class="row">
                               <div class="col-md-12">
-									 <div class="text-center thankyou-reg">
-										 <?php echo $multiLanguage->translate($data, "thankyou_for_registration", "translate");?>
-										 <br/>
-										 <br/>
-										 <p><?php echo $multiLanguage->translate($data, "nova_registracia", "translate");?></p>
-										 <a class="btn btn-lg btn-color mlr-10" href="<?php echo $rest->getModulUrl("registracia"); ?>" style="margin-top: 10px;">
-										 <span class="btn-u"><?php echo $multiLanguage->translate($data, "registracia", "translate");?></span>
-										 </a>
-									</div>
+                                     <div class="text-center thankyou-reg">
+                                         <?php echo $multiLanguage->translate($data, 'thankyou_for_registration', 'translate');?>
+                                         <br/>
+                                         <br/>
+                                         <p><?php echo $multiLanguage->translate($data, 'nova_registracia', 'translate');?></p>
+                                         <a class="btn btn-lg btn-color mlr-10" href="<?php echo $rest->getModulUrl('registracia'); ?>" style="margin-top: 10px;">
+                                         <span class="btn-u"><?php echo $multiLanguage->translate($data, 'registracia', 'translate');?></span>
+                                         </a>
+                                    </div>
                               </div>
                            </div>
                         </div>
@@ -425,15 +423,15 @@ $layout = $vendor->getLayout();
                   </div>
                </div>
             </div>
-            <?php }else{ ?>
-            <?php if($data['meta_tree']['keys']['koniec_registracie']['show'] == 1){ ?>
+            <?php } else { ?>
+                <?php if ($data['meta_tree']['keys']['koniec_registracie']['show'] == 1) { ?>
             <div class="row">
                <div class="col-md-12">
-                  <?php echo $data['meta_tree']['keys']['koniec_registracie']['value']; ?>
+                    <?php echo $data['meta_tree']['keys']['koniec_registracie']['value']; ?>
                </div>
             </div>
-            <?php }	?>
-            <?php }	?>
+                <?php } ?>
+            <?php } ?>
             <!--form end -->
          </div>
       </div>
@@ -446,4 +444,4 @@ $layout = $vendor->getLayout();
 </div>
 <!--Contact Info Section-->
 <?php get_footer($data); ?>
-<?php include "dnt-view/layouts/".$layout."/bottom.php"; ?>
+<?php include 'dnt-view/layouts/' . $layout . '/bottom.php'; ?>

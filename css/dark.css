@@ -213,7 +213,7 @@ body.dark .header-v8 .dropdown-menu li > a:hover {
     }
 
     /*Header v2 Topbar*/
-    body.dark .header-v8 .topbar-buttons .btn-u-light	{
+    body.dark .header-v8 .topbar-buttons .btn-u-light   {
         border-color: #eee;
     }
 
@@ -253,7 +253,7 @@ body.dark .header-v8 .dropdown-menu li > a:hover {
     body.dark .header-v4 .navbar-nav,
     body.dark .header-v4 .navbar-default .navbar-toggle,
     body.dark .header-v4 .navbar-nav.navbar-border-bottom,
-    body.dark .header-v4 .navbar-default .navbar-nav > li a	{
+    body.dark .header-v4 .navbar-default .navbar-nav > li a {
         border-color: #555;
     }
 

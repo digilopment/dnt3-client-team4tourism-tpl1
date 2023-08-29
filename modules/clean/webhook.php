@@ -2,12 +2,10 @@
 
 class cleanModulController
 {
-
     public function run()
     {
-        include "tpl.php";
+        include 'tpl.php';
     }
-
 }
 
 $modul = new cleanModulController();

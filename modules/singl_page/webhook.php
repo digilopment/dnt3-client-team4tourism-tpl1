@@ -6,21 +6,20 @@ use DntLibrary\Base\Settings;
 
 class singlPageModulController
 {
-
     public function run()
     {
-        $article = new ArticleView;
-        $rest = new Rest;
-        $settings = new Settings;
+        $article = new ArticleView();
+        $rest = new Rest();
+        $settings = new Settings();
         $id = $article->getStaticId();
-        $articleName = $article->getPostParam("name", $id);
+        $articleName = $article->getPostParam('name', $id);
         $articleImage = $article->getPostImage($id);
 
         $custom_data = array(
-            "title" => $articleName . " | " . $settings->get("title"),
-            "post_id" => $article->getStaticId(),
-            "meta" => array(
-                '<meta name="keywords" content="' . $article->getPostParam("tags", $id) . '" />',
+            'title' => $articleName . ' | ' . $settings->get('title'),
+            'post_id' => $article->getStaticId(),
+            'meta' => array(
+                '<meta name="keywords" content="' . $article->getPostParam('tags', $id) . '" />',
                 '<meta name="description" content="' . $articleName . '" />',
                 '<meta content="' . $articleName . '" property="og:title" />',
                 '<meta content="' . SERVER_NAME . '" property="og:site_name" />',
@@ -32,12 +31,10 @@ class singlPageModulController
         if ($rest->webhook(2)) { //o jeden vyssi webhook ako maximalnz mozny
             $rest->loadDefault();
         } else {
-            include "tpl.php";
+            include 'tpl.php';
         }
     }
-
 }
 
 $modul = new partneriModulController();
 $modul->run();
-
