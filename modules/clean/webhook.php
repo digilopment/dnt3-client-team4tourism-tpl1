@@ -4,7 +4,7 @@ class cleanModulController
 {
     public function run()
     {
-        include 'tpl.php';
+       (new DntLibrary\Base\Dnt)->render(__DIR__ . '/tpl.php');
     }
 }
 

@@ -31,7 +31,7 @@ class singlPageModulController
         if ($rest->webhook(2)) { //o jeden vyssi webhook ako maximalnz mozny
             $rest->loadDefault();
         } else {
-            include 'tpl.php';
+            (new DntLibrary\Base\Dnt)->render(__DIR__ . '/tpl.php');
         }
     }
 }

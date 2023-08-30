@@ -5,7 +5,7 @@ class defaultModulController
     public function run()
     {
         header('HTTP/1.0 404 Not Found');
-        include 'tpl.php';
+        (new DntLibrary\Base\Dnt)->render(__DIR__ . '/tpl.php');
     }
 }
 

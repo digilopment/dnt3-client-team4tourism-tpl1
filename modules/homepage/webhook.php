@@ -9,7 +9,7 @@ class homepageModulController
     {
         $rest = new Rest();
         $db = new DB();
-        include 'tpl.php';
+        (new DntLibrary\Base\Dnt)->render(__DIR__ . '/tpl.php');
     }
 }
 
