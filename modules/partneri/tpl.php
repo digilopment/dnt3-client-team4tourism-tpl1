@@ -12,17 +12,17 @@ $image = new Image();
 
 $data = $frontend->get();
 $layout = $vendor->getLayout();
-include "dnt-view/layouts/".$layout."/tpl_functions.php";
-include "dnt-view/layouts/".$layout."/top.php"; 
+include 'dnt-view/layouts/' . $layout . '/tpl_functions.php';
+include 'dnt-view/layouts/' . $layout . '/top.php';
 ?>
 <!-- End Header -->
-<?php get_slider_main_db($data, 303, "mainslider"); ?>
+<?php get_slider_main_db($data, 303, 'mainslider'); ?>
 <?php
 /* get_slider($data, 303); */
 $RAW_DATA = $data['meta_tree']['keys'];
 $HOTELY = array();
 foreach ($RAW_DATA as $key => $item) {
-    if ($dnt->in_string("hotel_name", $key)) {
+    if ($dnt->in_string('hotel_name', $key)) {
         $HOTELY[] = $item['show'];
     }
 }
@@ -46,7 +46,7 @@ $COUNT_HOTEL = count($HOTELY);
                                     <div class="row">
                                         <div class="col-md-6">
                                             <?php
-                                            $GALLERY = explode(",", $data['meta_tree']['keys']['id_' . $i . '_image_1']['value']);
+                                            $GALLERY = explode(',', $data['meta_tree']['keys']['id_' . $i . '_image_1']['value']);
                                             $PHOTOS = array();
                                             if ($data['meta_tree']['keys']['id_' . $i . '_image_1']['show'] == 1) {
                                                 foreach ($GALLERY as $item) {
@@ -131,7 +131,7 @@ $COUNT_HOTEL = count($HOTELY);
     </div>
 </div>
 <?php
-$GALLERY = explode(",", $data['meta_tree']['keys']['id_1_image_1']['value']);
+$GALLERY = explode(',', $data['meta_tree']['keys']['id_1_image_1']['value']);
 $pocet = count($GALLERY);
 $index = rand(0, $pocet - 1);
 $PHOTOS = array();
@@ -140,4 +140,4 @@ if ($pocet > 0) {
 }
 ?>
 <?php get_footer($data); ?>
-<?php include "dnt-view/layouts/" . $layout . "/bottom.php"; ?>
+<?php include 'dnt-view/layouts/' . $layout . '/bottom.php'; ?>

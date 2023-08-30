@@ -5,23 +5,23 @@ use DntLibrary\Base\Dnt;
 use DntLibrary\Base\Frontend;
 use DntLibrary\Base\GoogleCaptcha;
 use DntLibrary\Base\Mailer;
+use DntLibrary\Base\MultyLanguage;
 use DntLibrary\Base\Rest;
 use DntLibrary\Base\Upload;
 use DntLibrary\Base\Vendor;
 use DntLibrary\Base\Voucher;
-use DntLibrary\Base\MultyLanguage;
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 $rest = new Rest();
 $db = new DB();
-$dntMailer = new Mailer;
-$frontend = new Frontend;
-$vendor = new Vendor;
-$dnt = new Dnt;
-$voucher = new Voucher;
-$multiLanguage = new MultyLanguage;
+$dntMailer = new Mailer();
+$frontend = new Frontend();
+$vendor = new Vendor();
+$dnt = new Dnt();
+$voucher = new Voucher();
+$multiLanguage = new MultyLanguage();
 
 $postId = $rest->webhook(4);
 $data = $frontend->get(false, $postId);
@@ -30,23 +30,23 @@ $secretKey = $data['meta_settings']['keys']['gc_secret_key']['value'];
 $gc = new GoogleCaptcha($siteKey, $secretKey);
 
 
-$form_base_name = $rest->post("form_base_name");
-$form_base_surname = $rest->post("form_base_surname");
-$form_base_psc = $rest->post("form_base_psc");
-$form_base_city = $rest->post("form_base_city");
-$form_base_email = $rest->post("form_base_email");
-$form_base_tel_c = $rest->post("form_base_tel_c");
-$form_base_custom_1 = $rest->post("form_base_custom_1");
-$ans = $rest->post("ans");
+$form_base_name = $rest->post('form_base_name');
+$form_base_surname = $rest->post('form_base_surname');
+$form_base_psc = $rest->post('form_base_psc');
+$form_base_city = $rest->post('form_base_city');
+$form_base_email = $rest->post('form_base_email');
+$form_base_tel_c = $rest->post('form_base_tel_c');
+$form_base_custom_1 = $rest->post('form_base_custom_1');
+$ans = $rest->post('ans');
 
-$podmienky = $rest->post("podmienky");
+$podmienky = $rest->post('podmienky');
 
-$newsletter_1 = $rest->post("newsletter_1");
-$newsletter_2 = $rest->post("newsletter_2");
+$newsletter_1 = $rest->post('newsletter_1');
+$newsletter_2 = $rest->post('newsletter_2');
 
-$newsletter_embed_1 = $rest->post("newsletter_embed_1");
-$newsletter_embed_2 = $rest->post("newsletter_embed_2");
-$newsletter_embed_3 = $rest->post("newsletter_embed_3");
+$newsletter_embed_1 = $rest->post('newsletter_embed_1');
+$newsletter_embed_2 = $rest->post('newsletter_embed_2');
+$newsletter_embed_3 = $rest->post('newsletter_embed_3');
 
 if ($data['meta_settings']['keys']['gc_secret_key']['show'] == 1 && $data['meta_settings']['keys']['gc_site_key']['show'] == 1) {
     $NO_CAPTCHA = 0;
@@ -62,9 +62,9 @@ if ($data['meta_settings']['keys']['gc_secret_key']['show'] == 1 && $data['meta_
 
 if (isset($_POST['sent'])) {
     if ($gc->getResult() || $NO_CAPTCHA) {
-        $attachment = "";
+        $attachment = '';
 
-        $filePath = "dnt-view/data/external-uploads/";
+        $filePath = 'dnt-view/data/external-uploads/';
         if (isset($_FILES['form_user_image_1'])) {
             $dntUpload = new Upload($_FILES['form_user_image_1']);
             if ($dntUpload->uploaded) {
@@ -72,58 +72,58 @@ if (isset($_POST['sent'])) {
                 $dntUpload->image_resize = true;
                 $dntUpload->image_convert = 'jpg';
                 $dntUpload->image_x = 800;
-                //$dntUpload->image_max_width = 800;   
+                //$dntUpload->image_max_width = 800;
                 $dntUpload->image_ratio_y = true;
                 $dntUpload->Process($filePath);
                 if ($dntUpload->processed) {
                     $CUSTOM = json_encode(var_export($_FILES['form_user_image_1'], true));
-                    $attachment = "" . WWW_PATH . "" . $filePath . "" . $dntUpload->file_dst_name . "";
+                    $attachment = '' . WWW_PATH . '' . $filePath . '' . $dntUpload->file_dst_name . '';
                 } else {
-                    $attachment = "";
+                    $attachment = '';
                 }
             }
         }
 
-        $table = "dnt_registred_users";
+        $table = 'dnt_registred_users';
 
-        $insertedData["`type`"] = "competitor-user";
-        $insertedData["`vendor_id`"] = $vendor->getId();
-        $insertedData["`datetime_creat`"] = $dnt->datetime();
+        $insertedData['`type`'] = 'competitor-user';
+        $insertedData['`vendor_id`'] = $vendor->getId();
+        $insertedData['`datetime_creat`'] = $dnt->datetime();
 
 
-        $insertedData["`name`"] = $form_base_name;
-        $insertedData["`surname`"] = $form_base_surname;
+        $insertedData['`name`'] = $form_base_name;
+        $insertedData['`surname`'] = $form_base_surname;
 
-        $insertedData["`session_id`"] = uniqid();
+        $insertedData['`session_id`'] = uniqid();
 
-        $insertedData["`psc`"] = $form_base_psc;
-        $insertedData["`mesto`"] = $form_base_city;
-        $insertedData["`email`"] = $form_base_email;
-        $insertedData["`tel_c`"] = $form_base_tel_c;
-        $insertedData["`custom_1`"] = $form_base_custom_1;
-        $insertedData["`podmienky`"] = 1;
-        $insertedData["`status`"] = 1;
+        $insertedData['`psc`'] = $form_base_psc;
+        $insertedData['`mesto`'] = $form_base_city;
+        $insertedData['`email`'] = $form_base_email;
+        $insertedData['`tel_c`'] = $form_base_tel_c;
+        $insertedData['`custom_1`'] = $form_base_custom_1;
+        $insertedData['`podmienky`'] = 1;
+        $insertedData['`status`'] = 1;
 
 
         if ($newsletter_embed_1 || $newsletter_1) {
-            $insertedData["`news`"] = 1;
+            $insertedData['`news`'] = 1;
         } else {
-            $insertedData["`news`"] = 0;
+            $insertedData['`news`'] = 0;
         }
         if ($newsletter_embed_2 || $newsletter_2) {
-            $insertedData["`news_2`"] = 1;
+            $insertedData['`news_2`'] = 1;
         } else {
-            $insertedData["`news_2`"] = 0;
+            $insertedData['`news_2`'] = 0;
         }
         /* if($newsletter_embed_3){
-          $insertedData["`news_3`"] 	= 1;
+          $insertedData["`news_3`"]     = 1;
           }else{
-          $insertedData["`news_3`"] 	= 0;
+          $insertedData["`news_3`"]     = 0;
           } */
 
-        $insertedData["`content`"] = $ans;
-        $insertedData["`ip_adresa`"] = $dnt->get_ip();
-        $insertedData["`img`"] = $attachment;
+        $insertedData['`content`'] = $ans;
+        $insertedData['`ip_adresa`'] = $dnt->get_ip();
+        $insertedData['`img`'] = $attachment;
 
         $db->dbTransaction();
         $db->insert($table, $insertedData);
@@ -136,11 +136,11 @@ if (isset($_POST['sent'])) {
 
 
         /*         * *
-         * KONFIGURACIA ODOSLANEHO EMAILU 
+         * KONFIGURACIA ODOSLANEHO EMAILU
          *
          *
          */
-        $msg = $multiLanguage->translate($data, "dakujeme_za_registraciu", "translate");
+        $msg = $multiLanguage->translate($data, 'dakujeme_za_registraciu', 'translate');
 
         if ($data['meta_tree']['keys']['email_sender']['show'] == 1 && $data['meta_tree']['keys']['email_subject']['show'] == 1) {
             $senderEmail = $data['meta_tree']['keys']['email_sender']['value'];
@@ -148,25 +148,25 @@ if (isset($_POST['sent'])) {
         } else {
             $lang = $data['meta_settings']['keys']['language']['value'];
             switch ($lang) {
-                case "sk":
-                    $senderEmail = "noreply@fingers-crossed.eu";
-                    $messageTitle = "Registracia do suťaže";
+                case 'sk':
+                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $messageTitle = 'Registracia do suťaže';
                     break;
-                case "cs":
-                    $senderEmail = "noreply@fingers-crossed.eu";
-                    $messageTitle = "Registrace do soutěže";
+                case 'cs':
+                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $messageTitle = 'Registrace do soutěže';
                     break;
-                case "en":
-                    $senderEmail = "noreply@fingers-crossed.eu";
-                    $messageTitle = "Competition registration";
+                case 'en':
+                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $messageTitle = 'Competition registration';
                     break;
-                case "de":
-                    $senderEmail = "noreply@fingers-crossed.eu";
-                    $messageTitle = "Gewinnspiel registrierung";
+                case 'de':
+                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $messageTitle = 'Gewinnspiel registrierung';
                     break;
                 default:
-                    $senderEmail = "info@vyhrat.com";
-                    $messageTitle = "Registrace do soutěže";
+                    $senderEmail = 'info@vyhrat.com';
+                    $messageTitle = 'Registrace do soutěže';
             }
         }
 
@@ -179,17 +179,17 @@ if (isset($_POST['sent'])) {
 
 
         $RESPONSE = 1;
-        $CUSTOM = "done";
+        $CUSTOM = 'done';
         $ATTACHMENT = $attachment;
         //$CUSTOM = "done";
     } else {
         $RESPONSE = 2;
-        $CUSTOM = "no captcha";
+        $CUSTOM = 'no captcha';
         $ATTACHMENT = false;
     }
 } else {
     $RESPONSE = 0;
-    $CUSTOM = "no post";
+    $CUSTOM = 'no post';
     $ATTACHMENT = false;
 }
 

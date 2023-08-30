@@ -4,8 +4,8 @@ var OwlCarousel = function () {
 
         //Owl Carousel
         initOwlCarousel: function () {
-	        //Blog Carousel
-			var owl = jQuery(".blog-carousel").owlCarousel({
+            //Blog Carousel
+            var owl = jQuery(".blog-carousel").owlCarousel({
                 items : 1,
                 itemsDesktop : [1000,1],
                 itemsDesktopSmall : [900,1],
@@ -13,10 +13,10 @@ var OwlCarousel = function () {
                 itemsMobile : [479,1],
                 slideSpeed: 700
             });
-            jQuery(".next-v3").click(function(){
+            jQuery(".next-v3").click(function () {
                 owl.trigger('owl.next');
             })
-            jQuery(".prev-v3").click(function(){
+            jQuery(".prev-v3").click(function () {
                 owl.trigger('owl.prev');
             })
         },
@@ -32,14 +32,14 @@ var OwlCarousel = function () {
                 itemsMobile : [479,1],
                 slideSpeed: 700
             });
-            jQuery(".next-v4").click(function(){
+            jQuery(".next-v4").click(function () {
                 owl.trigger('owl.next');
             })
-            jQuery(".prev-v4").click(function(){
+            jQuery(".prev-v4").click(function () {
                 owl.trigger('owl.prev');
             })
         }
-        
+
     };
-    
+
 }();

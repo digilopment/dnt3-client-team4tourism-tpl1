@@ -485,6 +485,9 @@ function get_nav_menu($data) {
     $navigation = new Navigation;
     $article = new ArticleView;
     $rest = new Rest;
+    
+    //var_dump($data);
+    //echo '<pre>' , var_dump($data) , '</pre>';
     ?>	
     <!-- Navbar -->
     <div class="navbar mega-menu" role="navigation">

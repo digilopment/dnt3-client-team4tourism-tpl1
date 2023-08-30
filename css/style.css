@@ -59,9 +59,9 @@ xsigin/signup popup
   clear: both;
 }
 .cd-user-modal-container .cd-switcher {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 .cd-user-modal-container .cd-switcher li {
   width: 50%;
@@ -82,7 +82,7 @@ xsigin/signup popup
   text-transform: uppercase;
 }
 .cd-user-modal-container .cd-switcher a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 .cd-user-modal-container .cd-switcher a.selected {
   background: #FFF;
@@ -198,8 +198,8 @@ xsigin/signup popup
   outline: none;
 }
 .no-touch .cd-form input[type=submit]:focus {
-	-webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
-	box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
 }
 
 .cd-form .hide-password {
@@ -331,24 +331,24 @@ xsigin/signup popup
 }
 
 .social-login {
-	width: 100%;
-	display: table;
-	font-size: 14px;
+    width: 100%;
+    display: table;
+    font-size: 14px;
 }
 .social-login span {
-	display: table-cell;
-	width: 32%;
+    display: table-cell;
+    width: 32%;
 }
 .social-login-facebook {
-	padding-right: 2%;
+    padding-right: 2%;
 }
 .social-login-twitter {
-	padding-left: 2%;
+    padding-left: 2%;
 }
 .social-login a {
-	display: block;
-	color: #fff;
-	padding: 12px 15px;
+    display: block;
+    color: #fff;
+    padding: 12px 15px;
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
@@ -356,67 +356,67 @@ xsigin/signup popup
 .social-login a:hover,
 .social-login a:focus,
 .social-login a:active {
-	color: #fff;
-	text-decoration: none;
+    color: #fff;
+    text-decoration: none;
 }
 .social-login i {
-	float: left;
-	margin-right: 10px;
-	font-size: 18px;
-	position: relative;
-	top: 2px;
+    float: left;
+    margin-right: 10px;
+    font-size: 18px;
+    position: relative;
+    top: 2px;
 }
 .social-login-google i {
-	top: 3px;
+    top: 3px;
 }
 .social-login-facebook a {
-	background: #4f6aa3;
+    background: #4f6aa3;
 }
 .social-login-facebook a:hover,
 .social-login-facebook a:focus,
 .social-login-facebook a:active {
-	background: #3b5998;
+    background: #3b5998;
 }
 .social-login-google a {
-	background: #e15d4d;
+    background: #e15d4d;
 }
 .social-login-google a:hover,
 .social-login-google a:focus,
 .social-login-google a:active {
-	background: #dd4b39;
+    background: #dd4b39;
 }
 .social-login-twitter a {
-	background: #55acee;
+    background: #55acee;
 }
 .social-login-twitter a:hover,
 .social-login-twitter a:focus,
 .social-login-twitter a:active {
-	background: #459cde;
+    background: #459cde;
 }
 @media (max-width: 465px) {
-	.social-login span {
-		text-align: center;
-	}
-	.social-login i {
-		display: none;
-	}
+    .social-login span {
+        text-align: center;
+    }
+    .social-login i {
+        display: none;
+    }
 }
 .cd-user-modal .lined-text {
-	position: relative;
-	margin-top: 30px;
-	text-align: center;
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
 }
 .cd-user-modal .lined-text span {
-	background: #fff;
-	color: #999;
-	padding: 0 10px;
-	position: relative;
-	z-index: 1;
+    background: #fff;
+    color: #999;
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
 }
 .cd-user-modal .lined-text hr {
-	width: 100%;
-	margin: 0;
-	position: absolute;
-	top: 11px;
-	left: 0;
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    top: 11px;
+    left: 0;
 }
