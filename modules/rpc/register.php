@@ -170,7 +170,10 @@ if (isset($_POST['sent'])) {
             }
         }
         
-        $strMsg = '<html><head><body>'.$msg.'</body></head></html>';
+        $senderEmail = 'info@winnprizes.eu';
+        $messageTitle = 'Registrace do soutěže';
+
+        $strMsg = '<html><head><body>' . $msg . '</body></head></html>';
         $dntMailer->set_recipient(array($form_base_email));
         $dntMailer->set_msg($strMsg);
         $dntMailer->set_subject($messageTitle);
