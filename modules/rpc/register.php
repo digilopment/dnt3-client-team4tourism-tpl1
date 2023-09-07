@@ -29,7 +29,6 @@ $siteKey = $data['meta_settings']['keys']['gc_site_key']['value'];
 $secretKey = $data['meta_settings']['keys']['gc_secret_key']['value'];
 $gc = new GoogleCaptcha($siteKey, $secretKey);
 
-
 $form_base_name = $rest->post('form_base_name');
 $form_base_surname = $rest->post('form_base_surname');
 $form_base_psc = $rest->post('form_base_psc');
@@ -90,7 +89,6 @@ if (isset($_POST['sent'])) {
         $insertedData['`vendor_id`'] = $vendor->getId();
         $insertedData['`datetime_creat`'] = $dnt->datetime();
 
-
         $insertedData['`name`'] = $form_base_name;
         $insertedData['`surname`'] = $form_base_surname;
 
@@ -103,7 +101,6 @@ if (isset($_POST['sent'])) {
         $insertedData['`custom_1`'] = $form_base_custom_1;
         $insertedData['`podmienky`'] = 1;
         $insertedData['`status`'] = 1;
-
 
         if ($newsletter_embed_1 || $newsletter_1) {
             $insertedData['`news`'] = 1;
@@ -169,17 +166,49 @@ if (isset($_POST['sent'])) {
                     $messageTitle = 'Registrace do soutěže';
             }
         }
-        
+
         $senderEmail = 'info@winnprizes.eu';
         $messageTitle = 'Registrace do soutěže';
 
         $strMsg = '<html><head><body>' . $msg . '</body></head></html>';
-        $dntMailer->set_recipient(array($form_base_email));
-        $dntMailer->set_msg($strMsg);
-        $dntMailer->set_subject($messageTitle);
-        $dntMailer->set_sender_name($senderEmail);
-        $dntMailer->set_sender_email($senderEmail);
-        $dntMailer->sent_email();
+        
+        //MAIL-CURL-START
+        $config = [
+            'provider' => 'mailGun', //smtp, sendGridV2
+            'senderEmail' => $senderEmail,
+            'senderName' => 'Winprizes',
+            'subject' => $messageTitle,
+            'disableClickLog' => 0,
+            'disableSeenLog' => 1,
+            'recipients' => [
+                [
+                    'recipientEmail' => $form_base_email,
+                    'recipientName' => $form_base_name,
+                    'subject' => $messageTitle,
+                ],
+            ],
+            'message' => $strMsg,
+        ];
+        $login = 'markiza';
+        $password = '20Mar15kiza';
+        $service = 'https://livedata.cms.markiza.sk/api/v1/mailer-service';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $service);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, ['config' => json_encode($config)]);
+        curl_setopt($ch, CURLOPT_USERPWD, "$login:$password");
+        $response = curl_exec($ch);
+        $info = curl_getinfo($ch);
+         //MAIL-CURL-END
+
+        /* $dntMailer->set_recipient(array($form_base_email));
+          $dntMailer->set_msg($strMsg);
+          $dntMailer->set_subject($messageTitle);
+          $dntMailer->set_sender_name($senderEmail);
+          $dntMailer->set_sender_email($senderEmail);
+          $dntMailer->sent_email(); */
 
 
         $RESPONSE = 1;
