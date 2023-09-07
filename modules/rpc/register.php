@@ -167,49 +167,17 @@ if (isset($_POST['sent'])) {
             }
         }
 
-        $senderEmail = 'info@winnprizes.eu';
+        $senderEmail = 'team4tourism@gmail.com';
         $messageTitle = 'Registrace do soutěže';
 
         $strMsg = '<html><head><body>' . $msg . '</body></head></html>';
-        
-        //MAIL-CURL-START
-        $config = [
-            'provider' => 'mailGun', //smtp, sendGridV2
-            'senderEmail' => $senderEmail,
-            'senderName' => 'Winprizes',
-            'subject' => $messageTitle,
-            'disableClickLog' => 0,
-            'disableSeenLog' => 1,
-            'recipients' => [
-                [
-                    'recipientEmail' => $form_base_email,
-                    'recipientName' => $form_base_name,
-                    'subject' => $messageTitle,
-                ],
-            ],
-            'message' => $strMsg,
-        ];
-        $login = 'markiza';
-        $password = '20Mar15kiza';
-        $service = 'https://livedata.cms.markiza.sk/api/v1/mailer-service';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $service);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, ['config' => json_encode($config)]);
-        curl_setopt($ch, CURLOPT_USERPWD, "$login:$password");
-        $response = curl_exec($ch);
-        $info = curl_getinfo($ch);
-         //MAIL-CURL-END
 
-        /* $dntMailer->set_recipient(array($form_base_email));
-          $dntMailer->set_msg($strMsg);
-          $dntMailer->set_subject($messageTitle);
-          $dntMailer->set_sender_name($senderEmail);
-          $dntMailer->set_sender_email($senderEmail);
-          $dntMailer->sent_email(); */
-
+        $dntMailer->set_recipient(array($form_base_email));
+        $dntMailer->set_msg($strMsg);
+        $dntMailer->set_subject($messageTitle);
+        $dntMailer->set_sender_name($senderEmail);
+        $dntMailer->set_sender_email($senderEmail);
+        $dntMailer->sent_email();
 
         $RESPONSE = 1;
         $CUSTOM = 'done';
