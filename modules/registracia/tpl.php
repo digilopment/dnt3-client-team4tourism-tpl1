@@ -130,11 +130,7 @@ foreach (array_keys($data['meta_tree']['keys']) as $key) {
 
                             $.ajax({
                                 // Your server script to process the upload
-                                <?php if ($multiLanguage->getLang() == '0') { ?>
-                                url: "<?php echo WWW_PATH; ?>rpc/json/competition-register/<?php echo $data['post_id']?>",
-                                <?php } else {?>
-                                url: "<?php echo WWW_PATH . $multiLanguage->getLang(); ?>/rpc/json/competition-register/<?php echo $data['post_id']?>",
-                                <?php } ?>
+                                url: "/rpc/json/competition-register/<?php echo $data['post_id']?>",
                                 type: 'POST',
 
                                 // Form data
