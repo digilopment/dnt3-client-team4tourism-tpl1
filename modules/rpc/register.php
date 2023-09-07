@@ -29,6 +29,7 @@ $siteKey = $data['meta_settings']['keys']['gc_site_key']['value'];
 $secretKey = $data['meta_settings']['keys']['gc_secret_key']['value'];
 $gc = new GoogleCaptcha($siteKey, $secretKey);
 
+
 $form_base_name = $rest->post('form_base_name');
 $form_base_surname = $rest->post('form_base_surname');
 $form_base_psc = $rest->post('form_base_psc');
@@ -89,6 +90,7 @@ if (isset($_POST['sent'])) {
         $insertedData['`vendor_id`'] = $vendor->getId();
         $insertedData['`datetime_creat`'] = $dnt->datetime();
 
+
         $insertedData['`name`'] = $form_base_name;
         $insertedData['`surname`'] = $form_base_surname;
 
@@ -101,6 +103,7 @@ if (isset($_POST['sent'])) {
         $insertedData['`custom_1`'] = $form_base_custom_1;
         $insertedData['`podmienky`'] = 1;
         $insertedData['`status`'] = 1;
+
 
         if ($newsletter_embed_1 || $newsletter_1) {
             $insertedData['`news`'] = 1;
@@ -166,18 +169,15 @@ if (isset($_POST['sent'])) {
                     $messageTitle = 'Registrace do soutěže';
             }
         }
-
-        $senderEmail = 'team4tourism@gmail.com';
-        $messageTitle = 'Registrace do soutěže';
-
-        $strMsg = '<html><head><body>' . $msg . '</body></head></html>';
-
+        
+        $strMsg = '<html><head><body>'.$msg.'</body></head></html>';
         $dntMailer->set_recipient(array($form_base_email));
         $dntMailer->set_msg($strMsg);
         $dntMailer->set_subject($messageTitle);
         $dntMailer->set_sender_name($senderEmail);
         $dntMailer->set_sender_email($senderEmail);
         $dntMailer->sent_email();
+
 
         $RESPONSE = 1;
         $CUSTOM = 'done';
