@@ -149,29 +149,30 @@ if (isset($_POST['sent'])) {
             $lang = $data['meta_settings']['keys']['language']['value'];
             switch ($lang) {
                 case 'sk':
-                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $senderEmail = 'noreply@winnprizes.eu';
                     $messageTitle = 'Registracia do suťaže';
                     break;
                 case 'cs':
-                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $senderEmail = 'noreply@winnprizes.eu';
                     $messageTitle = 'Registrace do soutěže';
                     break;
                 case 'en':
-                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $senderEmail = 'noreply@winnprizes.eu';
                     $messageTitle = 'Competition registration';
                     break;
                 case 'de':
-                    $senderEmail = 'noreply@fingers-crossed.eu';
+                    $senderEmail = 'noreply@winnprizes.eu';
                     $messageTitle = 'Gewinnspiel registrierung';
                     break;
                 default:
-                    $senderEmail = 'info@vyhrat.com';
+                    $senderEmail = 'info@winnprizes.eu';
                     $messageTitle = 'Registrace do soutěže';
             }
         }
-
+        
+        $strMsg = '<html><head><body>'.$msg.'</body></head></html>';
         $dntMailer->set_recipient(array($form_base_email));
-        $dntMailer->set_msg($msg);
+        $dntMailer->set_msg($strMsg);
         $dntMailer->set_subject($messageTitle);
         $dntMailer->set_sender_name($senderEmail);
         $dntMailer->set_sender_email($senderEmail);
